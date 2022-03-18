@@ -1,6 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { certificateService } from "../services/certificateService";
+import { login_required } from "../middlewares/login_required";
 
 // req.body 형식 
 // {
@@ -42,7 +43,7 @@ certificateRouter.post('/certificate/create', async function (req, res, next) {
     }
 })
 
-certificateRouter.get('/certificates/:id', async function (req, res, next) {
+certificateRouter.get('/certificates/:id', login_required, async function (req, res, next) {
     try{
       // URL 로 부터 id를 추출
         const certi_id = req.params.id
@@ -57,7 +58,7 @@ certificateRouter.get('/certificates/:id', async function (req, res, next) {
     }
 })
 
-certificateRouter.put('/certificates/:id', async function (req, res, next) {
+certificateRouter.put('/certificates/:id', login_required, async function (req, res, next) {
     try{
         const certi_id = req.params.id
 
@@ -82,7 +83,7 @@ certificateRouter.put('/certificates/:id', async function (req, res, next) {
 
 })
 
-certificateRouter.get('/certificatelist/:user_id', async function (req, res, next) {
+certificateRouter.get('/certificatelist/:user_id', login_required, async function (req, res, next) {
     try{
         // URL 로부터 user_id 추출 
         const user_id = req.params.user_id

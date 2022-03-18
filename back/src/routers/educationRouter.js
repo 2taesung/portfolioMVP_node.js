@@ -1,7 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { educationService } from "../services/educationService";
-// import {login_required} from "../middlewares/login_required";
+import {login_required} from "../middlewares/login_required";
 
  
 const educationRouter = Router()
@@ -37,7 +37,7 @@ educationRouter.post('/education/create', async function (req, res, next) {
     }
 })
 
-educationRouter.get('/educations/:id', async function (req, res, next) {
+educationRouter.get('/educations/:id', login_required, async function (req, res, next) {
     try {
         // URL 로 부터 id를 추출
         const education_id = req.params.id
@@ -52,7 +52,7 @@ educationRouter.get('/educations/:id', async function (req, res, next) {
     } 
  })
 
-educationRouter.put('/educations/:id', async function (req, res, next) {
+educationRouter.put('/educations/:id', login_required, async function (req, res, next) {
     try {
         // URL 로 부터 id를 추출
         const education_id = req.params.id
@@ -82,7 +82,7 @@ educationRouter.put('/educations/:id', async function (req, res, next) {
 })
 
 
-educationRouter.get('/educationlist/:user_id', async function (req, res, next) {
+educationRouter.get('/educationlist/:user_id', login_required,  async function (req, res, next) {
     try {
         // URL 로 부터 user_id를 추출
         const user_id = req.params.user_id
