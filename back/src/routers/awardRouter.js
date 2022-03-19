@@ -2,7 +2,7 @@ import is from "@sindresorhus/is";
 import { Router } from "express";
 import { awardService } from "../services/awardService";
 import { login_required } from "../middlewares/login_required";
-
+ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ
 // req.body 형식 
 // {
 //     "user_id":"af4ff0af-2a5f-4eea-99f2-d18b42aba419",
