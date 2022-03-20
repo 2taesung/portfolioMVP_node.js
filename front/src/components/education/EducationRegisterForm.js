@@ -1,78 +1,92 @@
-import React, {useState} from "react"
-import * as Api from "../../api"
+import React, { useState } from "react";
+import * as Api from "../../api";
+import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import RadioButtonOnRegister from "./RadioButtonOnRegister";
 
-function EducationRegisterForm({portfolioOwnerId, setOnRegister, onNewEducation}) {
+function EducationRegisterForm({
+  portfolioOwnerId,
+  setOnRegister,
+  onNewEducation,
+}) {
+  console.log(portfolioOwnerId);
+  const [school, setSchool] = useState("");
+  const [major, setMajor] = useState("");
+  const [position, setPosition] = useState("");
 
-    console.log(portfolioOwnerId)
-    const [school, setSchool] = useState('')
-    const [major, setMajor] = useState('')
-    const [position, setPosition] = useState('')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await Api.post("education/create", {
+      user_id: portfolioOwnerId,
+      school,
+      major,
+      position,
+    });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(portfolioOwnerId)
-        
-        const res = await Api.post("education/create", {
-            "user_id": portfolioOwnerId,
-            school,
-            major,
-            position
-        })
-        const newEducation = res.data
-        onNewEducation(newEducation)
-        
-        // try catch 사용 ---> 왜해야해?
-        // let newEducation =''
-        // try {
-        //     const  res = await Api.post("education/create", {
-        //         "user_id": portfolioOwnerId,
-        //         school,
-        //         major,
-        //         position
-        //     })
-        //     newEducation = res.data
-        //     console.log('done requesting education creation')
-        // } catch (err) {
-        //     console.log("Education 생성에 실패하였습니다.")
-        // }
-        // onNewEducation(newEducation)
+    const newEducation = res.data;
+    onNewEducation(newEducation);
 
-        setOnRegister(false)
-    }
+    // try catch 사용 ---> 왜해야해?
+    // let newEducation =''
+    // try {
+    //     const  res = await Api.post("education/create", {
+    //         "user_id": portfolioOwnerId,
+    //         school,
+    //         major,
+    //         position
+    //     })
+    //     newEducation = res.data
+    //     console.log('done requesting education creation')
+    // } catch (err) {
+    //     console.log("Education 생성에 실패하였습니다.")
+    // }
+    // onNewEducation(newEducation)
 
-    return (
-        <>
-        <form onSubmit={handleSubmit}>
-            <input value={school} onChange={(e)=>{
-                e.preventDefault()
-                setSchool(e.target.value)
-                }} type="text" placeholder="학교이름"/>
+    setOnRegister(false);
+  };
 
-            <input value={major} onChange={(e)=>{
-                e.preventDefault()
-                setMajor(e.target.value)
-                }} type="text" placeholder="전공"/>
-
-            <div value = {position} onChange={(e)=>{
-                e.preventDefault()
-                setPosition(e.target.value)
-                }}>
-                <div>
-                    <input type="radio" name="position" value="학사중"/>학사중
-                  </div>
-                <div>
-                    <input type="radio" name="position" value="석사중"/>석사중
-                  </div>
-                <div>
-                    <input type="radio" name="position" value="박사중"/>박사중
-                  </div>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-        
-        
-        </>
-    )
+  return (
+    <Card>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="school" className="mb-3">
+            <Form.Control
+              value={school}
+              onChange={(e) => {
+                e.preventDefault();
+                setSchool(e.target.value);
+              }}
+              type="text"
+              placeholder="학교이름"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              value={major}
+              onChange={(e) => {
+                setMajor(e.target.value);
+              }}
+              type="text"
+              placeholder="전공"
+            />
+          </Form.Group>
+          <RadioButtonOnRegister
+            position={position}
+            setPosition={setPosition}
+          ></RadioButtonOnRegister>
+          <Form.Group as={Row} className="mt-3 text-center">
+            <Col sm={{ span: 20 }}>
+              <Button variant="primary" type="submit" className="me-3">
+                확인
+              </Button>
+              <Button variant="secondary" onClick={() => setOnRegister(false)}>
+                취소
+              </Button>
+            </Col>
+          </Form.Group>
+        </Form>
+      </Card.Body>
+    </Card>
+  );
 }
 
-export default EducationRegisterForm
+export default EducationRegisterForm;
