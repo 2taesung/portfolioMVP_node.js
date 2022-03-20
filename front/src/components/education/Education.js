@@ -3,8 +3,9 @@ import EducationCardEdit from "./EducationCardEdit"
 // import EducationCard from "./EducationCard"
 import EducationRegisterForm from "./EducationRegisterForm"
 import * as Api from "../../api"
+// import { ToastBody } from "react-bootstrap";
 
-function MyEducationCard ({school, major, position, id }){
+function MyEducationCard ({school, major, position, id , onEditEducation}){
     // 편집 모드 스위처 생성 - 사용자가 처음 페이지 접근할 시 default 로 false  
     const [isEditing, setIsEditing] = useState(false);
     
@@ -16,10 +17,9 @@ function MyEducationCard ({school, major, position, id }){
     }  
 
    return <>
-    
     {isEditing
     ?
-    <EducationCardEdit setIsEditing={setIsEditing} cardInfo={cardInfo} ></EducationCardEdit>
+    <EducationCardEdit setIsEditing={setIsEditing} cardInfo={cardInfo} onEditEducation = {onEditEducation}></EducationCardEdit>
     :<>
     <br></br>
     <p>학교: {school}</p>
@@ -27,13 +27,14 @@ function MyEducationCard ({school, major, position, id }){
     <p>포지션: {position}</p>
     <button onClick = {()=> {setIsEditing(true)
     }}>편집</button>
+    <br></br>
     </>
     }
     </>
 }
 
 
-function MyEducationCards( {portfolioOwnerId, educations, onNewEducation}) {
+function MyEducationCards( {portfolioOwnerId, educations, onNewEducation, onEditEducation}) {
 
     // 등록 모드 스위처 생성 - 사용자가 처음 페이지 접근 시 default로 false
     const [onRegister, setOnRegister] = useState(false)
@@ -49,6 +50,7 @@ function MyEducationCards( {portfolioOwnerId, educations, onNewEducation}) {
                     major = {item.major}
                     position = {item.position}
                     id = {item.id}
+                    onEditEducation = {onEditEducation}
                     ></MyEducationCard>
                     
             })
@@ -111,6 +113,24 @@ function Education ({portfolioOwnerId, isEditable }) {
         setEducations(newEducations)
     }
 
+    // 편집된 Education 반영하여 educations 수정 
+    const handleEditEducation = (card_id, school, major, position) => {
+        console.log(1)
+        const mapped = educations.map((education) => {
+            if (education.id === card_id) {
+                return { id: card_id,
+                         school,
+                         major,
+                         position}
+            } else {
+                return {...education}
+            }
+        })
+        console.log(mapped)
+        setEducations(mapped)
+        console.log(educations)
+    }
+
     useEffect(() => {
         Api.get("educationlist", portfolioOwnerId).then((res) => setEducations(res.data))
     }, [portfolioOwnerId])
@@ -120,7 +140,7 @@ function Education ({portfolioOwnerId, isEditable }) {
     return (
         <>
         {isEditable
-        ? <MyEducationCards educations={educations} portfolioOwnerId={portfolioOwnerId} onNewEducation = {handleNewEdication}></MyEducationCards>
+        ? <MyEducationCards educations={educations} portfolioOwnerId={portfolioOwnerId} onNewEducation = {handleNewEdication} onEditEducation = {handleEditEducation}>  </MyEducationCards>
         : <h1>1<EducationCards education={educations}></EducationCards></h1> 
         }
         </>      

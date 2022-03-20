@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import * as Api from "../../api"
 
-function EducationCardEdit ({setIsEditing, cardInfo}) {
+function EducationCardEdit ({setIsEditing, cardInfo, onEditEducation}) {
     // setIsEditing(false) 
     console.log(cardInfo)
     const [school, setSchool] = useState(cardInfo.school)
@@ -23,6 +23,7 @@ function EducationCardEdit ({setIsEditing, cardInfo}) {
         } catch (err) {
             console.log("Education edit에 실패하였습니다.")
         }
+        onEditEducation(card_id, school, major, position)
         setIsEditing(false)
     }
 
