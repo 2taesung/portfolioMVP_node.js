@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import EducationCardEdit from "./EducationCardEdit"
 import EducationRegisterForm from "./EducationRegisterForm"
 import * as Api from "../../api"
-// import { ToastBody } from "react-bootstrap";
+import { Card, Row, Button, Col } from "react-bootstrap";
 
 function MyEducationCard ({school, major, position, id , onEditEducation}){
     // 편집 모드 스위처 생성 - 사용자가 처음 페이지 접근할 시 default 로 false  
@@ -14,23 +14,43 @@ function MyEducationCard ({school, major, position, id , onEditEducation}){
         position,
         id
     }  
-    
+
     return <>
-    {isEditing
-        ?
-        <EducationCardEdit setIsEditing={setIsEditing} cardInfo={cardInfo} onEditEducation = {onEditEducation}></EducationCardEdit>
-        :<>
-        <br></br>
-        <p>학교: {school}</p>
-        <p>전공: {major}</p>
-        <p>포지션: {position}</p>
-        <button onClick = {()=> {setIsEditing(true)
-        }}>편집</button>
-        <br></br>
+        { 
+            isEditing
+            ? <EducationCardEdit setIsEditing={setIsEditing} cardInfo={cardInfo} onEditEducation = {onEditEducation}></EducationCardEdit>
+            : 
+            <Card className="mb-1 ms-1 mr-1" style={{ width: "30rem" }}>
+            <Card.Body>
+            <Row className="justify-content-left">
+                <Col>
+                <Card.Title >학력</Card.Title>
+                <Card.Text >{school}</Card.Text>
+                <Card.Text className="mb-2 text-muted">{`${major}(${position})`}</Card.Text>
+                </Col>
+            </Row>
+            
+        
+            <Col>
+            <Row className="mt-3 text-left text-info">
+                <Col sm={{ span: 20 }}>
+                <Button
+                    variant="outline-info"
+                    size="sm"
+                    onClick={() => setIsEditing(true)}
+                > 편집
+                </Button>
+                </Col>
+            </Row>
+            </Col>
+         </Card.Body>
+         </Card>
+        }
         </>
-    }
-    </>
 }
+
+
+
 
 
 function MyEducationCards( {portfolioOwnerId, educations, onNewEducation, onEditEducation}) {
@@ -110,7 +130,6 @@ function Education ({portfolioOwnerId, isEditable }) {
                     ? <></>
                     : educations.map((item) => 
                     {return <>
-                        <p> 왜 안되지</p>
                         <p>학교: {item.school}</p>
                         <p>전공: {item.major}</p>
                         <p>포지션: {item.position}</p>

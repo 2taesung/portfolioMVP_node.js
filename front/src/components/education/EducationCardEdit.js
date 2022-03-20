@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import * as Api from "../../api"
+import { Button, Form, Card, Col, Row } from "react-bootstrap";
 
 function EducationCardEdit ({setIsEditing, cardInfo, onEditEducation}) {
     // setIsEditing(false) 
@@ -26,39 +27,91 @@ function EducationCardEdit ({setIsEditing, cardInfo, onEditEducation}) {
         onEditEducation(card_id, school, major, position)
         setIsEditing(false)
     }
+    
+    return <>
+    <Card>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="school" className="mb-3">
+                <Form.Control 
+                        value={school} 
+                    onChange={(e)=>{
+                        e.preventDefault()
+                        setSchool(e.target.value)
+                        }} 
+                    type="text" />
+            </Form.Group>
+            <Form.Group>
+                <Form.Control 
+                    value={major} 
+                    onChange={(e)=>{
+                        setMajor(e.target.value)
+                    }} type="text" />
+            </Form.Group>
 
-    return (
-        <>
-        <form onSubmit={handleSubmit}>
-            <input value={school} onChange={(e)=>{
-                e.preventDefault()
-                setSchool(e.target.value)
-                }} type="text" />
+            <Form.Group className="mb-3">
+                {/* <Form.Control 
+                        value={position} 
+                        onChange={(e)=>{
+                            e.preventDefault()
+                            setPosition(e.target.value)
+                        }} /> */}
+                <Form.Check
+                    inline
+                    label="학사중"
+                    name="position"
+                    type='radio'
+                    id="inline-radio-1"
+                    value="학사중"
+                    defaultChecked={position === '학사중'}
+                    onChange={(e)=>{
+                        e.preventDefault()
+                        setPosition(e.target.value)
+                    }}
 
-            <input value={major} onChange={(e)=>{
-                e.preventDefault()
-                setMajor(e.target.value)
-                }} type="text" />
+                />
+                <Form.Check
+                    inline
+                    label="석사중"
+                    name="position"
+                    type='radio'
+                    id="inline-radio-2"
+                    value="석사중"
+                    defaultChecked={position === '석사중'}
+                    onChange={(e)=>{
+                        e.preventDefault()
+                        setPosition(e.target.value)
+                    }}
+                />
+                <Form.Check
+                    inline
+                    label="박사중"
+                    name="position"
+                    type='radio'
+                    id="inline-radio-3"
+                    value="박사중"
+                    defaultChecked={position === '박사중'}
+                    onChange={(e)=>{
+                        e.preventDefault()
+                        setPosition(e.target.value)
+                    }}
+                />
+            </Form.Group> 
 
-            <div value = {position} onChange={(e)=>{
-                e.preventDefault()
-                setPosition(e.target.value)
-                }}>
-                <div>
-                    <input type="radio" name="position" value="학사중"/>학사중
-                  </div>
-                <div>
-                    <input type="radio" name="position" value="석사중"/>석사중
-                  </div>
-                <div>
-                    <input type="radio" name="position" value="박사중"/>박사중
-                  </div>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-        
-        </>
-    )
-}
-
-export default EducationCardEdit
+            <Form.Group as={Row} className="mt-3 text-center">
+            <Col sm={{ span: 20 }}>
+              <Button variant="primary" type="submit" className="me-3">
+                확인
+              </Button>
+              <Button variant="secondary" onClick={() => setIsEditing(false)}>
+                취소
+              </Button>
+            </Col>
+          </Form.Group>
+        </Form>
+      </Card.Body>
+      </Card>
+     </>
+    }
+    
+    export default EducationCardEdit

@@ -53,22 +53,24 @@ function Portfolio() {
     return "loading...";
   }
 
+  //md: medicum, lg: large lx: extra large
+
   return (
     <Container fluid>
       <Row>
-        <Col md="3" lg="3">
+        <Col md="3" lg="3"> 
           <User
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
         </Col>
         <Col> 
-          <Education
+          <div style={{ textAlign: "center" }}>
+            {/* 학력 목록, 수상이력 목록, 프로젝트 목록, 자격증 목록 만들기 */}
+            <Education
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
-          <div style={{ textAlign: "center" }}>
-            학력 목록, 수상이력 목록, 프로젝트 목록, 자격증 목록 만들기
           </div>
 
         </Col>
