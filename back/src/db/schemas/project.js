@@ -2,19 +2,19 @@ import { Schema, model } from "mongoose";
 
 const ProjectSchema = new Schema(
   {
-    title: {
+    "title": {
       type: String,
       required: true,
     },
-    description: {
+    "description": {
       type: String,
       required: true,
     },
-    from_date: {
+    "from_date": {
       type: String,
       required: true,
     },
-    to_date: {
+    "to_date": {
       type: String,
       required: false,
     },

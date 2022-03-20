@@ -15,7 +15,7 @@ projectRouter.post("/project/create", async function (req, res, next) {
     }
 
     // req (request) 에서 데이터 가져오기
-    console.log(req.body);
+    // console.log(req.body);
     const title = req.body.title;
     const description = req.body.description;
     const from_date = req.body.from_date;
@@ -28,7 +28,6 @@ projectRouter.post("/project/create", async function (req, res, next) {
       from_date,
       to_date,
     });
-
     if (newProject.errorMessage) {
       throw new Error(newProject.errorMessage);
     }

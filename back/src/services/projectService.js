@@ -2,8 +2,10 @@ import { Project } from "../db"; // from을 폴더(db) 로 설정 시, 디폴트
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-class userProjectService {
-  static async addProject({ title, description, from_date, to_date }) {
+class ProjectService {
+  async addProject({ title, description, from_date, to_date }) {
+    //Cannot read properties of undefined (reading 'addProject') 에러발생
+    console.log('여기');
     const newProject = { title, description, from_date, to_date };
     // db에 저장
     const createdNewProject = await Project.create({ newProject });
@@ -13,4 +15,4 @@ class userProjectService {
   }
 }
 
-export { userProjectService };
+export { ProjectService };
