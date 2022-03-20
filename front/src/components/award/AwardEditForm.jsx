@@ -6,12 +6,11 @@ import * as Api from "../../api";
 const AwardEditForm = ({award, setIsEditing, setAwardList}) => {
     const [title, setTitle] = useState(award.title)
     const [description, setDescription] = useState(award.description)
-    const params = useParams()
-    const userId = params.id
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();    
-        const res = await Api.put(`awards/${userId}`, {
+        const res = await Api.put(`awards/${award.id}`, {
           title,
           description,
         });

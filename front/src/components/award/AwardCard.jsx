@@ -7,11 +7,11 @@ const AwardCard = ({ award, isEditing }) => {
     return (
         <Card>
         {isEditing ? (
-            <AwardEditForm />
+            <AwardEditForm key={award.id} />
         ): (
             <Card.Body>
-                <Card.Subtitle>{award.title}</Card.Subtitle>
-                <Card.Text>{award.description}</Card.Text>                
+                <Card.Subtitle key={award.id}>{award.title}</Card.Subtitle>
+                <Card.Text key={award.id}>{award.description}</Card.Text>                
             </Card.Body>
         )}
         </Card>          
