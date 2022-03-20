@@ -33,7 +33,7 @@ function MyEducationCard ({school, major, position, id }){
 }
 
 
-function MyEducationCards( {portfolioOwnerId, educations, isEditable}) {
+function MyEducationCards( {portfolioOwnerId, educations, onNewEducation}) {
 
     // 등록 모드 스위처 생성 - 사용자가 처음 페이지 접근 시 default로 false
     const [onRegister, setOnRegister] = useState(false)
@@ -57,7 +57,7 @@ function MyEducationCards( {portfolioOwnerId, educations, isEditable}) {
         <button onClick = {()=> {setOnRegister(true)
     }}>+</button>
         {onRegister
-        ?<EducationRegisterForm portfolioOwnerId={portfolioOwnerId} setOnRegister={setOnRegister} />
+        ?<EducationRegisterForm portfolioOwnerId={portfolioOwnerId} setOnRegister={setOnRegister} onNewEducation = {onNewEducation}/>
         :<></>}
 
 {/* educations == null
@@ -105,6 +105,12 @@ function Education ({portfolioOwnerId, isEditable }) {
     // education data를 담는 그릇 생성
     const [educations, setEducations] = useState(null);
 
+    const handleNewEdication = (newEducation) => {
+        const newEducations = [...educations]
+        newEducations.push(newEducation)
+        setEducations(newEducations)
+    }
+
     useEffect(() => {
         Api.get("educationlist", portfolioOwnerId).then((res) => setEducations(res.data))
     }, [portfolioOwnerId])
@@ -114,7 +120,7 @@ function Education ({portfolioOwnerId, isEditable }) {
     return (
         <>
         {isEditable
-        ? <MyEducationCards educations={educations} portfolioOwnerId={portfolioOwnerId}></MyEducationCards>
+        ? <MyEducationCards educations={educations} portfolioOwnerId={portfolioOwnerId} onNewEducation = {handleNewEdication}></MyEducationCards>
         : <h1>1<EducationCards education={educations}></EducationCards></h1> 
         }
         </>      

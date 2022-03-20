@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import * as Api from "../../api"
 
-function EducationRegisterForm({portfolioOwnerId, setOnRegister}) {
+function EducationRegisterForm({portfolioOwnerId, setOnRegister, onNewEducation}) {
 
     console.log(portfolioOwnerId)
     const [school, setSchool] = useState('')
@@ -11,18 +11,32 @@ function EducationRegisterForm({portfolioOwnerId, setOnRegister}) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(portfolioOwnerId)
-        try {
-            await Api.post("education/create", {
-                "user_id": portfolioOwnerId,
-                school,
-                major,
-                position
-            })
+        
+        const res = await Api.post("education/create", {
+            "user_id": portfolioOwnerId,
+            school,
+            major,
+            position
+        })
+        const newEducation = res.data
+        onNewEducation(newEducation)
+        
+        // try catch 사용 ---> 왜해야해?
+        // let newEducation =''
+        // try {
+        //     const  res = await Api.post("education/create", {
+        //         "user_id": portfolioOwnerId,
+        //         school,
+        //         major,
+        //         position
+        //     })
+        //     newEducation = res.data
+        //     console.log('done requesting education creation')
+        // } catch (err) {
+        //     console.log("Education 생성에 실패하였습니다.")
+        // }
+        // onNewEducation(newEducation)
 
-            console.log('done requesting education creation')
-        } catch (err) {
-            console.log("Education 생성에 실패하였습니다.")
-        }
         setOnRegister(false)
     }
 
