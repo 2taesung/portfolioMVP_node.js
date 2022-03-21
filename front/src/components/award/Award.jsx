@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import * as Api from "../../api";
 import AwardCard from "./AwardCard";
-import { Row, Button } from "react-bootstrap";
 import { UserStateContext } from "../../App";
 
 const Award = ({ isEditable, setIsEditing }) => {
   const [awardList, setAwardList] = useState([]);
-
   const userState = React.useContext(UserStateContext);
 
   useEffect(() => {
     const { id } = userState.user;
-    console.log(id);
     Api.get("awardlist", id).then((res) => setAwardList(res.data));
   }, [awardList, userState]);
 
