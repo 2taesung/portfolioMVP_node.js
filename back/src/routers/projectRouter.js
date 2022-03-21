@@ -1,13 +1,12 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
-import { projectService } from "../services/projectService";
+import { ProjectService } from "../services/projectService";
 
 const projectRouter = Router();
 
 projectRouter.post("/project/create", async function (req, res, next) {
   try {
-    //해당 에러에서 걸리는데 여기부터 작업 다시 시작
     if (is.emptyObject(req.body)) {
       throw new Error(
         "headers의 Content-Type을 application/json으로 설정해주세요"
@@ -22,7 +21,8 @@ projectRouter.post("/project/create", async function (req, res, next) {
     const to_date = req.body.to_date;
 
     // 위 데이터를 유저 db에 추가하기
-    const newProject = await projectService.addProject({
+    //Cannot read properties of undefined (reading 'addProject') 에러발생
+    const newProject = await ProjectService.addProject({
       title,
       description,
       from_date,
@@ -37,5 +37,21 @@ projectRouter.post("/project/create", async function (req, res, next) {
     next(error);
   }
 });
+
+projectRouter.get(
+  "/projects/:id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      // URI로부터 사용자 id를 추출함.
+      const user_id = req.params.id;
+
+      const projects = await ProjectService.getProjects({ user_id });
+      res.status(200).send(projects);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 export { projectRouter };

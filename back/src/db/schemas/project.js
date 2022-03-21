@@ -2,6 +2,11 @@ import { Schema, model } from "mongoose";
 
 const ProjectSchema = new Schema(
   {
+    "user_id": {
+      type: String,
+      required: false,
+      index: true,
+    },
     "title": {
       type: String,
       required: true,
