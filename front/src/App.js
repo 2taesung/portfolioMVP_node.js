@@ -48,6 +48,8 @@ function App() {
     fetchCurrentUser();
   }, []);
 
+  console.log(userState);
+
   if (!isFetchCompleted) {
     return "loading...";
   }
