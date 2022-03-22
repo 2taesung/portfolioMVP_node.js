@@ -27,7 +27,10 @@ const ProjectEditForm = ({prj, setIsEditing, setProjectList}) => {
                             type="text"
                             placeholder="수상내역"
                             value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            onChange={(e) => {
+                                e.preventDefault();
+                                setTitle(e.target.value)
+                            }}
                         />
                     </Form.Group>
                     
@@ -36,7 +39,10 @@ const ProjectEditForm = ({prj, setIsEditing, setProjectList}) => {
                             type="text"
                             placeholder="상세내역"
                             value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => {
+                                e.preventDefault();
+                                setDescription(e.target.value)
+                            }}
                         />
                     </Form.Group>
 

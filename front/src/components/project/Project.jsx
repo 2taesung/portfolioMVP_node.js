@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
-import * as Api from "../../api";
+import React from "react";
+
 import ProjectCard from "./ProjectCard";
-import { UserStateContext } from "../../App";
 
-const Project = () => {
-  const [projectList, setProjectList] = useState([]);
-  const userState = React.useContext(UserStateContext);
-
-  useEffect(() => {
-    const { id } = userState.user;
-    Api.get("projectlist", id).then((res) => setProjectList(res.data));
-  }, [projectList, userState]);
+const Project = ({ projectList }) => {
 
   return (
     <>

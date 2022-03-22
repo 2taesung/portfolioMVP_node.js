@@ -8,6 +8,8 @@ import User from "./user/User";
 import Projects from "./project/Projects";
 import Awards from "./award/Awards";
 import AwardTest from "./award/awardtest";
+import Education from "./education/Education";
+
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -54,6 +56,8 @@ function Portfolio() {
     return "loading...";
   }
 
+  //md: medicum, lg: large lx: extra large
+
   return (
     <Container fluid>
       <Col>
@@ -74,6 +78,10 @@ function Portfolio() {
               portfolioOwnerId={portfolioOwner.id}
               isEditable={portfolioOwner.id === userState.user?.id}
             /> */}
+            <Education
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
           </div>
         </Row>
       </Col>
