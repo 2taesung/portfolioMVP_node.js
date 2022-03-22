@@ -5,21 +5,21 @@ import { Card, Button, Col } from "react-bootstrap";
 import { UserStateContext } from "../../App";
 import * as Api from "../../api";
 
-const Certificates = ({ isEditable }) => {
+const CertificateContainer = ({ isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [certificateList, setCertificateList] = useState([]);
   const userState = React.useContext(UserStateContext);
   const { id } = userState.user;
 
+  const newCertificateHandler = (newCertificate) => {
+    const newCertificateList = [...certificateList];
+    newCertificateList.push(newCertificate);
+    setCertificateList(newCertificateList);
+  };
+
   useEffect(() => {
     Api.get("certificatelist", id).then((res) => setCertificateList(res.data));
-  }, [certificateList, userState]);
-
-  const newCertificateHandler = (newCertificate) => {
-    const newCertificateList = [...certificateList]
-    newCertificateList.push(newCertificate)
-    setCertificateList(newCertificateList)
-  }
+  }, []);
 
   return (
     <Card className="mb-1 ms-1 mr-1">
@@ -28,7 +28,10 @@ const Certificates = ({ isEditable }) => {
           <Card.Title>자격증</Card.Title>
         </Col>
         <Col>
-          <Certificate isEditable={isEditable} certificateList={certificateList} />
+          <Certificate
+            isEditable={isEditable}
+            certificateList={certificateList}
+          />
         </Col>
 
         {isEditable && (
@@ -42,14 +45,15 @@ const Certificates = ({ isEditable }) => {
             </Button>
           </Col>
         )}
-        {isAdding && 
-          <CertificateAddForm 
-            setIsAdding={setIsAdding} 
-            addCertificateList={newCertificateHandler} 
-          />}
+        {isAdding && (
+          <CertificateAddForm
+            setIsAdding={setIsAdding}
+            addCertificateList={newCertificateHandler}
+          />
+        )}
       </Card.Body>
     </Card>
   );
 };
 
-export default Certificates;
+export default CertificateContainer;

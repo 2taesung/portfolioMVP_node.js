@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 
-function EducationCards({ educations }) {
+function OthersEducationCards({ educations }) {
   return (
     <>
       {educations == null ? (
@@ -29,4 +29,4 @@ function EducationCards({ educations }) {
   );
 }
 
-export default EducationCards;
+export default OthersEducationCards;

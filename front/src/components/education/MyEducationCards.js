@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import MyEducationCard from "./MyEducationCard";
 import EducationRegisterForm from "./EducationRegisterForm";
 import { Button, Col } from "react-bootstrap";
@@ -6,29 +7,26 @@ import { Button, Col } from "react-bootstrap";
 function MyEducationCards({
   portfolioOwnerId,
   educations,
-  onNewEducation,
+  handleAddEducationClick,
   onEditEducation,
 }) {
   // 등록 모드 스위처 생성 - 사용자가 처음 페이지 접근 시 default로 false
   const [onRegister, setOnRegister] = useState(false);
 
   return (
-    <>
-      {educations == null ? (
-        <></>
-      ) : (
-        educations.map((item) => {
-          return (
-            <MyEducationCard
-              school={item.school}
-              major={item.major}
-              position={item.position}
-              id={item.id}
-              onEditEducation={onEditEducation}
-            ></MyEducationCard>
-          );
-        })
-      )}
+    <MyEducationCardWrapper>
+      {educations.map((item, idx) => {
+        return (
+          <MyEducationCard
+            key={`education-card-${idx}`}
+            school={item.school}
+            major={item.major}
+            position={item.position}
+            id={item.id}
+            onEditEducation={onEditEducation}
+          ></MyEducationCard>
+        );
+      })}
 
       <Col className="text-center">
         <Button
@@ -47,11 +45,16 @@ function MyEducationCards({
         <EducationRegisterForm
           portfolioOwnerId={portfolioOwnerId}
           onRegister={setOnRegister}
-          onNewEducation={onNewEducation}
+          onNewEducation={handleAddEducationClick}
         />
       )}
-    </>
+    </MyEducationCardWrapper>
   );
 }
 
 export default MyEducationCards;
+
+const MyEducationCardWrapper = styled.div`
+  padding: 8px;
+  border: 1px solid #ddd;
+`;

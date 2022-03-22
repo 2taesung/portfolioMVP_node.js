@@ -8,41 +8,26 @@ function EducationRegisterForm({
   onRegister,
   onNewEducation,
 }) {
-  console.log(portfolioOwnerId);
   const [school, setSchool] = useState("");
   const [major, setMajor] = useState("");
   const [position, setPosition] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await Api.post("education/create", {
-      user_id: portfolioOwnerId,
-      school,
-      major,
-      position,
-    });
+  const handleSubmit = React.useCallback(
+    async (e) => {
+      e.preventDefault();
+      const res = await Api.post("education/create", {
+        user_id: portfolioOwnerId,
+        school,
+        major,
+        position,
+      });
 
-    const newEducation = res.data;
-    onNewEducation(newEducation);
-
-    // try catch 사용 ---> 왜해야해?
-    // let newEducation =''
-    // try {
-    //     const  res = await Api.post("education/create", {
-    //         "user_id": portfolioOwnerId,
-    //         school,
-    //         major,
-    //         position
-    //     })
-    //     newEducation = res.data
-    //     console.log('done requesting education creation')
-    // } catch (err) {
-    //     console.log("Education 생성에 실패하였습니다.")
-    // }
-    // onNewEducation(newEducation)
-
-    onRegister(false);
-  };
+      const newEducation = res.data;
+      onNewEducation(newEducation);
+      onRegister(false);
+    },
+    [portfolioOwnerId, school, major, position]
+  );
 
   return (
     <Card>
