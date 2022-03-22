@@ -5,26 +5,24 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import * as Api from "../../api"
 
-const ProjectAddForm = ({ addProjectList, setIsAdding }) => {    
+const CertificateAddForm = ({ addCertificateList, setIsAdding }) => {    
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
-    const userState = React.useContext(UserStateContext);
-    const { id } = userState.user;
+    const [whenDate, setWhenDate] = useState(new Date())
+    const userState = React.useContext(UserStateContext)
+    const { id } = userState.user
     
     
     const submitHandler = async (event) => {
         event.preventdefault()
-        const res = await Api.post("project/create", {
+        const res = await Api.post("certificate/create", {
                 user_id: id,
                 title,
                 description,
-                startDate,
-                endDate,
+                whenDate,
             })
-            const newProject = res.data
-            addProjectList(newProject)
+            const newCertificate = res.data
+            addCertificateList(newCertificate)
             setIsAdding(false)
     }    
 
@@ -32,15 +30,15 @@ const ProjectAddForm = ({ addProjectList, setIsAdding }) => {
         <Card>
             <Card.Body>
                 <Form onSubmit={submitHandler}>
-                    <Form.Group controlId="awardEditTitle" className="mb-3">
+                    <Form.Group controlId="certificateEditTitle" className="mb-3">
                         <Form.Control
                             type="text"
-                            placeholder="프로젝트 제목"
+                            placeholder="자격증 제목"
                             value={title}
                             onChange={(event) => setTitle(event.target.value)} />
                     </Form.Group>
 
-                    <Form.Group controlId="awardEditDescription" className="mb-3">
+                    <Form.Group controlId="certificateEditDescription" className="mb-3">
                         <Form.Control
                             type="text"
                             placeholder="상세내역"
@@ -49,12 +47,7 @@ const ProjectAddForm = ({ addProjectList, setIsAdding }) => {
                     </Form.Group>
 
                     <Row>
-                        <Col>
-                            <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} />
-                        </Col>
-                        <Col>
-                            <DatePicker selected={endDate} onChange={(date: Date) => setEndDate(date)} />
-                        </Col>
+                        <DatePicker selected={whenDate} onChange={(date: Date) => setWhenDate(date)} />
                     </Row>
 
                     <Form.Group as={Row} className="mt-3 text-center">
@@ -75,4 +68,4 @@ const ProjectAddForm = ({ addProjectList, setIsAdding }) => {
 
 }
 
-export default ProjectAddForm;
+export default CertificateAddForm;

@@ -9,6 +9,7 @@ import Projects from "./project/Projects";
 import Awards from "./award/Awards";
 import AwardTest from "./award/awardtest";
 import Education from "./education/Education";
+import Certificates from "./certificate/Certificates"
 
 
 function Portfolio() {
@@ -70,16 +71,19 @@ function Portfolio() {
         <Row>
           <div>
             {/* <AwardTest /> */}
-            <Projects
+            {/* <Projects
               portfolioOwnerId={portfolioOwner.id}
               isEditable={portfolioOwner.id === userState.user?.id}
-            />
+            /> */}
             {/* <Awards
               portfolioOwnerId={portfolioOwner.id}
               isEditable={portfolioOwner.id === userState.user?.id}
             /> */}
             <Education
               portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
+            <Certificates
               isEditable={portfolioOwner.id === userState.user?.id}
             />
           </div>
