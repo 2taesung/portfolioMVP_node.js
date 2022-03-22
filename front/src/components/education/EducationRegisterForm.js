@@ -5,7 +5,7 @@ import RadioButtonOnRegister from "./RadioButtonOnRegister";
 
 function EducationRegisterForm({
   portfolioOwnerId,
-  setOnRegister,
+  onRegister,
   onNewEducation,
 }) {
   console.log(portfolioOwnerId);
@@ -41,7 +41,7 @@ function EducationRegisterForm({
     // }
     // onNewEducation(newEducation)
 
-    setOnRegister(false);
+    onRegister(false);
   };
 
   return (
@@ -78,7 +78,7 @@ function EducationRegisterForm({
               <Button variant="primary" type="submit" className="me-3">
                 확인
               </Button>
-              <Button variant="secondary" onClick={() => setOnRegister(false)}>
+              <Button variant="secondary" onClick={() => onRegister(false)}>
                 취소
               </Button>
             </Col>
