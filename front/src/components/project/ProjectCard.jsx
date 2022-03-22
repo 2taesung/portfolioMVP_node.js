@@ -1,28 +1,28 @@
 import React from "react";
-import AwardEditForm from "./AwardEditForm";
+import ProjectEditForm from "./ProjectEditForm";
 import { Card } from "react-bootstrap";
 import { UserStateContext } from "../../App";
 
-const AwardCard = ({ user, award }) => {
+const ProjectCard = ({ user, prj }) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const userState = React.useContext(UserStateContext);
   const { id } = userState.user;
   if({id} === user) {
       setIsEditing(true)
   } setIsEditing(false)
-
+  
   return (
     <Card>
       {isEditing ? (
-        <AwardEditForm />
+        <ProjectEditForm />
       ) : (
         <Card.Body>
-          <Card.Subtitle>{award.title}</Card.Subtitle>
-          <Card.Text>{award.description}</Card.Text>
+          <Card.Subtitle>{prj.title}</Card.Subtitle>
+          <Card.Text>{prj.description}</Card.Text>
         </Card.Body>
       )}
     </Card>
   );
 };
 
-export default AwardCard;
+export default ProjectCard;

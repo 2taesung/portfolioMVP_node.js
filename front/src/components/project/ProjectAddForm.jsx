@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import { UserStateContext } from "../../App";
-import { Button, Form, Container, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
+import { Button, Form, Container, Col, Row } from "react-bootstrap"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import * as Api from "../../api"
 
-const AwardAddForm = ({ setIsAdding }) => {    
+const ProjectAddForm = ({ setIsAdding }) => {    
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
     const userState = React.useContext(UserStateContext);
+    const { id } = userState.user;
     
-    const submitHandler = async (event) => {
+    
+    const submitHandler = (event) => {
         event.preventdefault()
-        const { id } = userState.user;
-        try {
-            await Api.post("award/create", {
+        Api
+            .post("project/create", {
                 id,
                 title,
                 description,
+                startDate,
+                endDate,
             })
-        setIsAdding(false)
-        } catch (err) {
-            console.log("수상내역 추가 실패", err)
-        }
+            .then(setIsAdding(false))
     }    
 
     return (
@@ -31,9 +35,9 @@ const AwardAddForm = ({ setIsAdding }) => {
                         <Form.Group controlId="awardEditTitle" className="mb-3">
                             <Form.Control
                                 type="text" 
-                                placeholder="수상내역" 
+                                placeholder="프로젝트 제목" 
                                 value={title} 
-                                onChange={event=>setTitle(event.target.value)} /> 
+                                onChange={(event)=>setTitle(event.target.value)} /> 
                             </Form.Group>
 
                             <Form.Group controlId="awardEditDescription" className="mb-3">
@@ -41,8 +45,13 @@ const AwardAddForm = ({ setIsAdding }) => {
                                     type="text" 
                                     placeholder="상세내역" 
                                     value={description} 
-                                onChange={event=>setDescription(event.target.value)} />
+                                onChange={(event)=>setDescription(event.target.value)} />
                             </Form.Group>
+                            
+                            <Row>
+                                <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
+                                <DatePicker selected={endDate} onChange={(date:Date) => setEndDate(date)} />
+                            </Row>
 
                             <Form.Group as={Row} className="mt-3 text-center">
                                 <Col sm={{span:20}}>
@@ -62,4 +71,4 @@ const AwardAddForm = ({ setIsAdding }) => {
 
 }
 
-export default AwardAddForm;
+export default ProjectAddForm;

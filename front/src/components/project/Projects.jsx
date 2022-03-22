@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import AwardAddForm from "./AwardAddForm";
-import Award from "./Award";
+import ProjectAddForm from "./ProjectAddForm";
+import Project from "./Project";
 import { Card, Button, Col } from "react-bootstrap";
 
-const Awards = ({ isEditable }) => {
+const Projects = ({ isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
 
   return (
     <Card className="mb-2 ms-3 mr-5" style={{ width: "60rem" }}>
       <Card.Body>
         <Col className="justify-content-md-center">
-          <Card.Title>수상이력</Card.Title>
+          <Card.Title>프로젝트</Card.Title>
         </Col>
         <Col>
-          <Award isEditable={isEditable} />
+          <Project isEditable={isEditable} />
         </Col>
 
         {isEditable && (
@@ -27,10 +27,10 @@ const Awards = ({ isEditable }) => {
             </Button>
           </Col>
         )}
-        {isAdding && <AwardAddForm setIsAdding={setIsAdding} />}
+        {isAdding && <ProjectAddForm setIsAdding={setIsAdding} />}
       </Card.Body>
     </Card>
   );
 };
 
-export default Awards;
+export default Projects;

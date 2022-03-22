@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const AwardEditForm = ({award, setIsEditing, setAwardList}) => {
-    const [title, setTitle] = useState(award.title)
-    const [description, setDescription] = useState(award.description)
+const ProjectEditForm = ({prj, setIsEditing, setProjectList}) => {
+    const [title, setTitle] = useState(prj.title)
+    const [description, setDescription] = useState(prj.description)
     
 
     const handleSubmit = async (e) => {
         e.preventDefault();    
-        const res = await Api.put(`awards/${award.id}`, {
+        const res = await Api.put(`projects/${prj.id}`, {
           title,
           description,
         });
-        const updatedAwardList = res.data;
-        setAwardList(updatedAwardList);
+        const updatedProjectList = res.data;
+        setProjectList(updatedProjectList);
         setIsEditing(false);
       };
 
@@ -22,7 +22,7 @@ const AwardEditForm = ({award, setIsEditing, setAwardList}) => {
         <Card className="mb-2">
             <Card.Body>
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="awardEditTitle" className="mb-3">
+                    <Form.Group controlId="projcetEditTitle" className="mb-3">
                         <Form.Control
                             type="text"
                             placeholder="수상내역"
@@ -31,7 +31,7 @@ const AwardEditForm = ({award, setIsEditing, setAwardList}) => {
                         />
                     </Form.Group>
                     
-                    <Form.Group controlId="awardEditDescription">
+                    <Form.Group controlId="prjectEditDescription">
                         <Form.Control
                             type="text"
                             placeholder="상세내역"
@@ -56,4 +56,4 @@ const AwardEditForm = ({award, setIsEditing, setAwardList}) => {
     )
 }
 
-export default AwardEditForm;
+export default ProjectEditForm;
