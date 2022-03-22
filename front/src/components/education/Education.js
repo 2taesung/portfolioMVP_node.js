@@ -30,7 +30,6 @@ function Education({ portfolioOwnerId, isEditable }) {
   );
 
   useEffect(() => {
-    console.log("test call");
     Api.get("educationlist", portfolioOwnerId).then((res) =>
       setEducations(res.data)
     );

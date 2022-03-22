@@ -2,14 +2,13 @@ import React from "react";
 import CertificateCard from "./CertificateCard";
 
 const Certificate = ({ certificateList }) => {
-
   return (
-    <>
+    <div>
       {certificateList.map((certi) => {
         return (
           <CertificateCard
-            user={`certi-${certi.user_id}`}
             key={`certi-${certi.id}`}
+            user={`certi-${certi.user_id}`}
             certi={{
               id: certi.id,
               title: certi.title,
@@ -19,7 +18,7 @@ const Certificate = ({ certificateList }) => {
           />
         );
       })}
-    </>
+    </div>
   );
 };
 

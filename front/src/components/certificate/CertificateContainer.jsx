@@ -12,9 +12,9 @@ const CertificateContainer = ({ isEditable }) => {
   const { id } = userState.user;
 
   const newCertificateHandler = (newCertificate) => {
-    const newCertificateList = [...certificateList];
-    newCertificateList.push(newCertificate);
-    setCertificateList(newCertificateList);
+    // const newCertificateList = [...certificateList];
+    // newCertificateList.push(newCertificate);
+    // setCertificateList(newCertificateList);
   };
 
   useEffect(() => {
@@ -45,6 +45,7 @@ const CertificateContainer = ({ isEditable }) => {
             </Button>
           </Col>
         )}
+
         {isAdding && (
           <CertificateAddForm
             setIsAdding={setIsAdding}

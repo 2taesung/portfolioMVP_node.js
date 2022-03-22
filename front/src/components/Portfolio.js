@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Col, Row } from "react-bootstrap";
 
@@ -9,7 +10,7 @@ import Projects from "./project/Projects";
 import Awards from "./award/Awards";
 import AwardTest from "./award/awardtest";
 import Education from "./education/Education";
-import Certificates from "./certificate/CertificateContainer";
+import CertificateContainer from "./certificate/CertificateContainer";
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ function Portfolio() {
   //md: medicum, lg: large lx: extra large
 
   return (
-    <Container fluid>
+    <PortfolioWrapper>
       <Col>
         <Col md="3" lg="3">
           <User
@@ -84,14 +85,18 @@ function Portfolio() {
               isEditable={portfolioOwner.id === userState.user?.id}
             />
 
-            {/* <Certificates
+            <CertificateContainer
               isEditable={portfolioOwner.id === userState.user?.id}
-            /> */}
+            />
           </div>
         </Row>
       </Col>
-    </Container>
+    </PortfolioWrapper>
   );
 }
+
+const PortfolioWrapper = styled.div`
+  padding: 30px 10px;
+`;
 
 export default Portfolio;
