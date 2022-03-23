@@ -2,6 +2,10 @@ import { Schema, model } from "mongoose";
 
 const ProjectSchema = new Schema(
   {
+    "id": {
+      type: String,
+      required: true,
+    },
     "user_id": {
       type: String,
       required: false,

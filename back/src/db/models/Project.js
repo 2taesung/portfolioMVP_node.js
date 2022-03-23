@@ -7,7 +7,13 @@ class Project {
   }
 
   static async findAll({ user_id }) {
-    const userProjects = await ProjectModel.find({ id: user_id });
+    const userProjectList = await ProjectModel.find({ user_id: user_id });
+    return userProjectList;
+  }
+
+  static async findById({ projects_id }) {
+    const userProjects = await ProjectModel.findOne({ id: projects_id });
+    console.log(userProjects);
     return userProjects;
   }
 }
