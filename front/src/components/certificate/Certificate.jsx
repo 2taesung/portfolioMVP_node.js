@@ -1,12 +1,13 @@
 import React from "react";
 import CertificateCard from "./CertificateCard";
 
-const Certificate = ({ certificateList }) => {
+const Certificate = ({ isEditable, certificateList }) => {
   return (
     <div>
       {certificateList.map((certi) => {
         return (
           <CertificateCard
+            isEditable={isEditable}
             key={`certi-${certi.id}`}
             user={`certi-${certi.user_id}`}
             certi={{

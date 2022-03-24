@@ -7,15 +7,28 @@ import * as Api from "../../api";
 
 const CertificateContainer = ({ isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
-  const [certificateList, setCertificateList] = useState([]);
+  const [certificateList, setCertificateList] = useState([])
   const userState = React.useContext(UserStateContext);
   const { id } = userState.user;
 
-  const newCertificateHandler = (newCertificate) => {
+  const newCertificateHandler = React.useCallback(
+    (newCertificate) => {
+      const newList = certificateList.concat(newCertificate)
+      setCertificateList(newList)
+    },
+    [certificateList]
+  )  
     // const newCertificateList = [...certificateList];
     // newCertificateList.push(newCertificate);
     // setCertificateList(newCertificateList);
-  };
+    
+    const removeHandler = React.useCallback(
+      (removedCertificate) => {
+        const removedList = certificateList.filter(removedCertificate)
+        setCertificateList(removedList)
+      },
+      [certificateList]
+    )
 
   useEffect(() => {
     Api.get("certificatelist", id).then((res) => setCertificateList(res.data));

@@ -1,26 +1,58 @@
-import React from "react";
+import React, {useState} from "react";
 import CertificateEditForm from "./CertificateEditForm";
-import { Card } from "react-bootstrap";
-import { UserStateContext } from "../../App";
+import { Card, Col, Button } from "react-bootstrap";
 
-const CertificateCard = ({ user, certi }) => {
-  const [isEditing, setIsEditing] = React.useState(false);
-  const userState = React.useContext(UserStateContext);
-  const { id } = userState.user;
+
+const CertificateCard = ({ isEditable, certi }) => {
+  
+  const [isEditing, setIsEditing] = useState(false)
+
+  if (isEditable) {
+    return (
+      <>
+      {isEditing ? (
+        <CertificateEditForm
+          setIsEditing={setIsEditing}
+          certi={certi}
+        />
+      ) : (
+      <Card>
+        <Card.Body>
+          <Card.Subtitle>{certi.title}</Card.Subtitle>
+          <Card.Text>{certi.description}</Card.Text>
+          <Card.Text>{certi.whenDate}</Card.Text>
+        </Card.Body>
+        <Col className="text-center" sm={{ span: 20 }}>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setIsEditing(true)}
+          >
+            편집
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setIsEditing(true)}
+          >
+            삭제
+          </Button>
+        </Col>
+      </Card>
+    )}
+    </>
+    )
+  }
 
   return (
     <Card>
-      {isEditing ? (
-        <CertificateEditForm />
-      ) : (
         <Card.Body>
           <Card.Subtitle>{certi.title}</Card.Subtitle>
           <Card.Text>{certi.description}</Card.Text>
           <Card.Text>{certi.startDate}</Card.Text>
         </Card.Body>
-      )}
-    </Card>
-  );
+      </Card>
+  )
 };
 
 export default CertificateCard;

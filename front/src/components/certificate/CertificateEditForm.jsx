@@ -1,20 +1,31 @@
 import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
+import { UserStateContext } from "../../App";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-const CertificateEditForm = ({certi, setIsEditing, setCertificateList}) => {
+const CertificateEditForm = ({certi, setIsEditing, certificateList, setCertificateList}) => {
     const [title, setTitle] = useState(certi.title)
     const [description, setDescription] = useState(certi.description)
+    const [whenDate, setWhenDate] = useState(new Date())
+    const userState = React.useContext(UserStateContext)
+    const {id} = userState.user
     
 
     const handleSubmit = async (e) => {
-        e.preventDefault();    
+        e.stopPropagation()
+        e.preventDefault()
         const res = await Api.put(`certificates/${certi.id}`, {
-          title,
-          description,
+            user_id: id,
+            id: certi.id,
+            title,
+            description,
+            whenDate,
         });
-        const updatedCertificateList = res.data;
-        setCertificateList(updatedCertificateList);
+        const updatedCertificate = res.data;
+        const updatedList = certificateList.concat(updatedCertificate)
+        setCertificateList(updatedList)
         setIsEditing(false);
       };
 
@@ -33,7 +44,7 @@ const CertificateEditForm = ({certi, setIsEditing, setCertificateList}) => {
                             }}
                         />
                     </Form.Group>
-                    
+
                     <Form.Group controlId="prjectEditDescription">
                         <Form.Control
                             type="text"
@@ -45,6 +56,13 @@ const CertificateEditForm = ({certi, setIsEditing, setCertificateList}) => {
                             }}
                         />
                     </Form.Group>
+
+                    <Row>
+                        <DatePicker
+                            selected={whenDate}
+                            onChange={(date) => setWhenDate(date)}
+                        />
+                    </Row>
 
                     <Form.Group as={Row} className="mt-3 text-center">
                         <Col sm={{ span: 20 }}>

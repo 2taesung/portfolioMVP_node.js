@@ -6,14 +6,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as Api from "../../api";
 
 const CertificateAddForm = ({ addCertificateList, setIsAdding }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [whenDate, setWhenDate] = useState(new Date());
-  const userState = React.useContext(UserStateContext);
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [whenDate, setWhenDate] = useState(new Date())
+  const userState = React.useContext(UserStateContext)
   const { id } = userState.user;
 
   const handleAddClick = async (event) => {
-    event.stopPropagation();
+    event.stopPropagation()
     const res = await Api.post("certificate/create", {
       user_id: id,
       title,
@@ -25,6 +25,7 @@ const CertificateAddForm = ({ addCertificateList, setIsAdding }) => {
     setIsAdding(false);
   };
 
+  
   return (
     <Card>
       <Card.Body>
