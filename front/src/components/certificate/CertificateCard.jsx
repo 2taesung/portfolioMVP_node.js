@@ -49,7 +49,7 @@ const CertificateCard = ({ isEditable, certi }) => {
         <Card.Body>
           <Card.Subtitle>{certi.title}</Card.Subtitle>
           <Card.Text>{certi.description}</Card.Text>
-          <Card.Text>{certi.startDate}</Card.Text>
+          <Card.Text>{certi.whenDate}</Card.Text>
         </Card.Body>
       </Card>
   )
