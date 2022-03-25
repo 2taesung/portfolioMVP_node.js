@@ -1,7 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
-import { AwardService } from "../services/awardService";
+import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
 
@@ -20,9 +20,8 @@ awardRouter.post("/award/create", async function (req, res, next) {
     const description = req.body.description;
     
 
-    // 위 데이터를 유저 db에 추가하기
-    //Cannot read properties of undefined (reading 'addProject') 에러발생
-    const newAward = await AwardService.addAward({
+    
+    const newAward = await awardService.addAward({
       user_id,
       title,
       description,
@@ -38,23 +37,6 @@ awardRouter.post("/award/create", async function (req, res, next) {
   }
 });
 
-awardRouter.get(
-  "/awardlist/:id",
-  login_required,
-  async function (req, res, next) {
-    try {
-      // URI로부터 사용자 id를 추출함.
-      console.log(req.params);
-      const user_id = req.params.id;
-      console.log(user_id);
-
-      const award_list = await AwardService.getAwardList({ user_id });
-      res.status(200).send(award_list);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
 
 awardRouter.get(
   "/awards/:id",
@@ -63,8 +45,8 @@ awardRouter.get(
     try {
       const awards_id = req.params.id;
       // console.log(projects_id);
-
-      const awards = await AwardService.getAwards({ awards_id });
+      const awards = await awardService.getAwards({ awards_id });
+      
       res.status(200).send(awards);
     } catch (error) {
       next(error);
@@ -72,5 +54,51 @@ awardRouter.get(
   }
 );
 
+
+awardRouter.put(
+  "/awards/:id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      // URL 로 부터 id를 추출
+      const award_id = req.params.id;
+      const { title, description } = req.body; // 일단 null 은 고려 안함
+      const toUpdate = { title, description };
+      console.log(toUpdate);
+
+      // 해당 eudcation_id 로 db에서 정보 찾아 업데이트
+      const updatedAward = await awardService.setAward({
+        award_id,
+        toUpdate,
+      });
+
+      if (updatedAward.errorMessage) {
+        throw new Error(updatedAward.errorMessage);
+      }
+
+      res.status(200).json(updatedAward);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+
+awardRouter.get(
+  "/awardlist/:user_id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      // URI로부터 사용자 id를 추출함.
+      
+      const user_id = req.params.user_id;
+      const award_list = await awardService.getAwardList({ user_id });
+
+      res.status(200).send(award_list);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 export { awardRouter };
