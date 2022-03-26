@@ -8,12 +8,19 @@ function UserCard({
     backgroundColor, 
     isNetwork
   }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
+  function isDark() {
+    return user?.backgroundColor === '#663399' || user?.backgroundColor === '#2e8b57' ||
+    user?.backgroundColor ==='#FF4500'|| user?.backgroundColor ==='#7B68EE'
+           ? 'white' : 'dark'
+  }
+
   return (
     <Card 
       className="mb-2 ms-3 mr-5"
       style={{ backgroundColor: user?.backgroundColor }}
-      text={backgroundColor === ('#663399'|'#2e8b57'|'#FF4500') ? 'dark' : 'white'}   
+      text={isDark()}   
     >
       <Card.Body>
         <Row className="justify-content-md-center">

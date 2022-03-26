@@ -66,7 +66,8 @@ function UserEditForm({ user, setIsEditing, setUser }) {
           <ButtonWrapper>
           <ButtonGroup className="lg">
             <Button
-              class="btn btn-outline-light"
+              variant="primary"
+              className="btn text-dark"
               style={{ backgroundColor: "#ffb6c1" }}
               onClick={(e) => {
                 setBackgroundColor("#ffb6c1")
