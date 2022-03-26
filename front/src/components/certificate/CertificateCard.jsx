@@ -42,23 +42,24 @@ const CertificateCard = ({ isEditable, certi, certificateList, setCertificateLis
                   <Card.Text className= "mb-1 text-muted">{whenDate}</Card.Text>
                 </Col>
 
-                <Col className="mt-3 text-center text-info">
+                  <Col className="mt-3 text-center text-info">
+                    <Button
+                      className="float-end"
+                      variant="outline-info"
+                      size="sm"
+                      onClick={() => setIsEditing(true)}
+                    >
+                      삭제
+                    </Button>
                   <Button
-                    className="float-end "
+                    className="float-end me-2"
                     variant="outline-info"
                     size="sm"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
                   </Button>
-                  <Button
-                    className="float-end"
-                    variant="outline-info"
-                    size="sm"
-                    onClick={() => setIsEditing(true)}
-                  >
-                    삭제
-                  </Button>
+                  
                 </Col>
               </Row>
             </Card.Body>

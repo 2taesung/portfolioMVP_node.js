@@ -25,15 +25,7 @@ const AwardCard = ({ isEditable, awd, awardList, setAwardList }) => {
                 </Col>
 
                 <Col className="mt-3 text-center text-info">
-                  <Button
-                    className="float-end "
-                    variant="outline-info"
-                    size="sm"
-                    onClick={() => setIsEditing(true)}
-                  >
-                    편집
-                  </Button>
-                  <Button
+                <Button
                     className="float-end"
                     variant="outline-info"
                     size="sm"
@@ -41,6 +33,15 @@ const AwardCard = ({ isEditable, awd, awardList, setAwardList }) => {
                   >
                     삭제
                   </Button>
+                  <Button
+                    className="float-end me-2"
+                    variant="outline-info"
+                    size="sm"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    편집
+                  </Button>
+                  
                 </Col>
               </Row>
             </Card.Body>

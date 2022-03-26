@@ -29,9 +29,17 @@ function MyEducationCard({ school, major, position, id, onEditEducation }) {
                 <Card.Text>{school}</Card.Text>
                 <Card.Text className="mb-2 text-muted">{`${major}(${position})`}</Card.Text>
               </Col>
-              <Col className="mt-3 text-center text-info">
+                <Col className="mt-3 text-center text-info">
+                  <Button
+                    className="float-end"
+                    variant="outline-info"
+                    size="sm"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    삭제
+                  </Button>
                 <Button
-                  className="float-end"
+                  className="float-end me-2"
                   variant="outline-info"
                   size="sm"
                   onClick={() => setIsEditing(true)}
@@ -45,7 +53,7 @@ function MyEducationCard({ school, major, position, id, onEditEducation }) {
         </Container>
       )}
     </>
-  );
+  )
 }
 
-export default MyEducationCard;
+export default MyEducationCard
