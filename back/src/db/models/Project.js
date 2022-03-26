@@ -16,6 +16,17 @@ class Project {
     console.log(userProjects);
     return userProjects;
   }
+
+  static async update({ projects_id, toUpdate }) {
+    const filter = { id: projects_id }
+    const newValue = {
+      title: toUpdate.title,
+      description: toUpdate.description,
+      from_date: toUpdate.from_date,
+      to_date: toUpdate.to_date,
+    }
+    return await ProjectModel.findOneAndUpdate(filter, newValue, { new: true })
+  }
 }
 
 export { Project };

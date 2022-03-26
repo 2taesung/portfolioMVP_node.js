@@ -74,5 +74,33 @@ projectRouter.get(
   }
 );
 
+projectRouter.put(
+  "/projects/:id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      const projects_id = req.params.id;
+      // console.log(projects_id);
+
+      const { title, description, from_date, to_date } = req.body
+      const toUpdate = {
+        title,
+        description,
+        from_date,
+        to_date,
+      }
+
+      const updatedProjects = await ProjectService.setProjects({ projects_id, toUpdate });
+      if (updatedProjects.errorMessage) {
+        throw new Error(updatedProjects.errorMessage)
+      }
+
+      res.status(200).json(updatedProjects);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 
 export { projectRouter };
