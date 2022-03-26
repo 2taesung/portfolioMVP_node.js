@@ -22,7 +22,7 @@ const CertificateEditForm = ({ certi, setIsEditing, certificateList, setCertific
             title,
             description,
             when_date,
-        });
+        })
         const updatedCertificate = res.data
         const updatedList = certificateList.map((certi) => {
             if (certi.id === updatedCertificate.id) {

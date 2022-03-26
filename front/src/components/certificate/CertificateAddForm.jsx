@@ -74,4 +74,4 @@ const CertificateAddForm = ({ addCertificateList, setIsAdding }) => {
   )
 }
 
-export default CertificateAddForm;
+export default CertificateAddForm

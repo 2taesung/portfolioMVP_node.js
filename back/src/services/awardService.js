@@ -11,7 +11,7 @@ class awardService {
     }
 
     const id = uuidv4();
-    const newAward = { id, user_id, title, description}
+    const newAward = { id, user_id, title, description }
     // db에 저장
     const createdNewAward = await Award.create({ newAward })
     createdNewAward.errorMessage = null  // 문제 없이 db 저장 완료되었으므로 에러가 없음.
@@ -46,7 +46,7 @@ class awardService {
     // const updatedEducation = await Education.update({education_id, toUpdate})
     // return updatedEducation
 
-  static async getAwards({ user_id }) {
+  static async getAwardList({ user_id }) {
     const user = await User.findById({user_id})
 
     if(!user) {
