@@ -1,10 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { Card, Row, Button, Col } from "react-bootstrap";
 
-function UserCard({ user, setIsEditing, isEditable, isNetwork, width }) {
+function UserCard({ 
+    user, 
+    setIsEditing, 
+    isEditable, 
+    backgroundColor, 
+    isNetwork
+  }) {
   const navigate = useNavigate();
   return (
-    <Card style={{width:width}}>
+    <Card 
+      className="mb-2 ms-3 mr-5"
+      style={{ width: "18rem", backgroundColor: user?.backgroundColor }}
+      text={backgroundColor === ('#663399'|'#2e8b57'|'#FF4500') ? 'dark' : 'white'}   
+    >
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
