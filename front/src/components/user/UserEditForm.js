@@ -33,7 +33,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   };
 
   return (
-    <Card className="mb-2" style={{backgroundColor: editFormColor}}>
+    <Card className="mb-2 ms-3 mr-5" style={{backgroundColor: editFormColor}}>
       <Card.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="useEditName" className="mb-3">
@@ -66,7 +66,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
           <ButtonWrapper>
           <ButtonGroup className="lg">
             <Button
-              variant="primary"
               className="btn text-dark"
               style={{ backgroundColor: "#ffb6c1" }}
               onClick={(e) => {
