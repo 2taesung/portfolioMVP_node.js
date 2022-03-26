@@ -26,7 +26,7 @@ function Header() {
   return (
     <Nav activeKey={location.pathname}>
       <Nav.Item className="me-auto mb-5">
-        <Nav.Link disabled>안녕하세요, 포트폴리오 공유 서비스입니다.</Nav.Link>
+        <Nav.Link disabled></Nav.Link>
       </Nav.Item>
       <Nav.Item>
       <Nav.Link style={{color: "#430f58"}} onClick={() => navigate("/")}>My Page</Nav.Link>

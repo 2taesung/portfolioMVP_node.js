@@ -63,8 +63,13 @@ function LoginForm() {
     <Container>
       <Row className="justify-content-md-center mt-5">
       <Col>
+        <Row className='mb-5'>
           <h1>Share We<br/>PORT -<br/>FOLIO?</h1>
-        </Col>
+        </Row>
+        <Row className='mt-5'>
+          <h3>당신의 경험을<br/>사람들과 공유해 보세요.</h3>
+        </Row>
+      </Col>
 
         <Col lg={8}>
           <Form onSubmit={handleSubmit}>

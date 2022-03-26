@@ -32,7 +32,7 @@ function UserCard({
           />
         </Row>
         <Card.Title>{user?.name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
+        <Card.Subtitle className="mb-2">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
 
         {isEditable && (
