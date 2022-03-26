@@ -11,7 +11,6 @@ const AwardAddForm = ({ addAwardList, setIsAdding }) => {
     
     const handleAddClick = async (event) => {
         event.stopPropagation()
-        event.preventdefault()
         const res = await Api.post("award/create", {
             user_id: id,
             title,
