@@ -23,6 +23,23 @@ class ProjectService {
     console.log(projects);
     return projects
   }
+
+  static async setProjects({ projects_id, toUpdate }) {
+    // 해당 certi_id 존재하는지 확인
+    const projects = await Project.findById({ projects_id })
+
+    // db 에서 찾지 못한 경우, 에러 메세지 반환
+    if (!projects) {
+      const errorMessage = "해당 프로젝트이력은 존재하지 않습니다."
+      return { errorMessage }
+    }
+
+    // db 에서 업데이트
+    const updatedProjects = await Project.update({ projects_id, toUpdate })
+    return updatedProjects
+
+  }
+
 }
 
 export { ProjectService };

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import ProjectAddForm from "./ProjectAddForm";
-import Project from "./Project";
-import { Card, Button, Col } from "react-bootstrap";
-import { UserStateContext } from "../../App";
-import * as Api from "../../api";
+import React, { useState, useEffect } from "react"
+import ProjectAddForm from "./ProjectAddForm"
+import Project from "./Project"
+import { Card, Button, Col } from "react-bootstrap"
+import { UserStateContext } from "../../App"
+import * as Api from "../../api"
 
 const Projects = ({ isEditable }) => {
   const [isAdding, setIsAdding] = useState(false)
@@ -17,8 +17,7 @@ const Projects = ({ isEditable }) => {
       setProjectList(newList)
     },
     [projectList]
-  )
-  
+  )  
 
   useEffect(() => {
     Api.get("projectlist", id).then((res) => setProjectList(res.data))
@@ -56,7 +55,7 @@ const Projects = ({ isEditable }) => {
           />}
       </Card.Body>
     </Card>
-  );
-};
+  )
+}
 
-export default Projects;
+export default Projects

@@ -5,7 +5,7 @@ import { UserStateContext } from "../../App"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
-const ProjectEditForm = ({ prj, setIsEditing, setProjectList }) => {
+const ProjectEditForm = ({ prj, setIsEditing, projectList, setProjectList }) => {
     const [title, setTitle] = useState(prj.title)
     const [description, setDescription] = useState(prj.description)
     const [startDate, setStartDate] = useState(new Date(prj.from_date))
@@ -25,7 +25,7 @@ const ProjectEditForm = ({ prj, setIsEditing, setProjectList }) => {
             to_date: endDate,
         });
         const updatedProject = res.data
-        const updatedList = updatedProject.map((prj) => {
+        const updatedList = projectList.map((prj) => {
             if (prj.id === updatedProject.id) {
                 return {
                     ...updatedProject,
@@ -82,7 +82,7 @@ const ProjectEditForm = ({ prj, setIsEditing, setProjectList }) => {
 
                     <Form.Group as={Row} className="mt-3 text-center">
                         <Col sm={{ span: 20 }}>
-                            <Button variant="primary" type="button" className="me-3">
+                            <Button variant="primary" type="button" className="me-3" onClick={handleSubmit}>
                                 확인
                             </Button>
                             <Button variant="secondary" onClick={() => setIsEditing(false)}>

@@ -63,6 +63,6 @@ const ProjectCard = ({ isEditable, prj, projectList, setProjectList }) => {
       </Col>
     </Container>
   )
-};
+}
 
-export default ProjectCard;
+export default ProjectCard

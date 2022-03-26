@@ -9,7 +9,19 @@ class Award {
   static async findById({ award_id }) {
     const post = await AwardModel.findOne({ id: award_id })
     return post
+
   }
+  
+
+  static async update({awards_id, toUpdate}) {
+    const filter = {id: awards_id}
+    const newValue = {
+        title: toUpdate.title,
+        description: toUpdate.description,     
+    }
+    return await AwardModel.findOneAndUpdate(filter, newValue, {new: true})
+}
+
 
   static async update({award_id, toUpdate}) {
     const filter = {id: award_id}
@@ -18,6 +30,7 @@ class Award {
         description: toUpdate.description,    
     }
     return await AwardModel.findOneAndUpdate(filter, newValue, {new: true})
+
   }
 
   static async findAll({user_id}) {
