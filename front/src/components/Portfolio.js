@@ -59,6 +59,7 @@ function Portfolio() {
   //md: medicum, lg: large lx: extra large
 
   return (
+    <PortfolioWrapper>
     <Container className="fluid">
       <Row>
         <Col lg="3">
@@ -94,11 +95,12 @@ function Portfolio() {
         </Col>
       </Row>
     </Container>
+    </PortfolioWrapper>
   );
 }
 
-// const PortfolioWrapper = styled.div`
-//   padding: 30px 10px;
-// `;
+const PortfolioWrapper = styled.div`
+  padding: 30px 10px;
+`;
 
 export default Portfolio;

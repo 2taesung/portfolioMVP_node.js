@@ -8,12 +8,10 @@ import "react-datepicker/dist/react-datepicker.css"
 const ProjectEditForm = ({ prj, setIsEditing, setProjectList }) => {
     const [title, setTitle] = useState(prj.title)
     const [description, setDescription] = useState(prj.description)
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date(prj.from_date))
+    const [endDate, setEndDate] = useState(new Date(prj.to_date))
     const userState = React.useContext(UserStateContext)
     const { id } = userState.user
-
-
 
     const handleSubmit = async (e) => {
         e.stopPropagation()

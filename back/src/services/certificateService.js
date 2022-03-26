@@ -2,14 +2,6 @@ import { User, Certificate} from "../db"; // from을 폴더(db) 로 설정 시, 
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
-// req.body 형식 
-// {
-//     "user_id":"af4ff0af-2a5f-4eea-99f2-d18b42aba419",
-//     "title":"운전면허증",
-//     "description":"2종 보통입니다.",
-//     "when_date":"2021-03-20"
-// }
-
 class certificateService {
     static async addCerti({ user_id, title, description, when_date }){
         // 우선 user_id 존재 여부 확인 

@@ -3,28 +3,28 @@ import { UserStateContext } from "../../App"
 import { Button, Form, Container, Col, Row } from "react-bootstrap"
 import * as Api from "../../api"
 
-const AwardAddForm = ({ addAwardList, setIsAdding }) => {    
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const userState = React.useContext(UserStateContext)
-    const { id } = userState.user
-    
-    const handleAddClick = async (event) => {
-        event.stopPropagation()
-        const res = await Api.post("award/create", {
-            user_id: id,
-            title,
-            description,
-        })
-        const newAward = res.data
-        addAwardList(newAward)
-        setIsAdding(false)
-    }    
+const AwardAddForm = ({ addAwardList, setIsAdding }) => {
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const userState = React.useContext(UserStateContext)
+  const { id } = userState.user
 
-    return (
-        <Container>
+  const handleAddClick = async (event) => {
+    event.stopPropagation()
+    const res = await Api.post("award/create", {
+      user_id: id,
+      title,
+      description,
+    })
+    const newAward = res.data
+    addAwardList(newAward)
+    setIsAdding(false)
+  }
+
+  return (
+    <Container>
       <Form>
-        <Form.Group controlId="certificateEditTitle" className="mb-3">
+        <Form.Group controlId="awardEditTitle" className="mb-3">
           <Form.Control
             type="text"
             placeholder="수상내역"
@@ -33,7 +33,7 @@ const AwardAddForm = ({ addAwardList, setIsAdding }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="certificateEditDescription" className="mb-3">
+        <Form.Group controlId="awardDescription" className="mb-3">
           <Form.Control
             type="text"
             placeholder="상세내역"
@@ -59,7 +59,7 @@ const AwardAddForm = ({ addAwardList, setIsAdding }) => {
         </Form.Group>
       </Form>
     </Container>
-    )
+  )
 }
 
-export default AwardAddForm;
+export default AwardAddForm

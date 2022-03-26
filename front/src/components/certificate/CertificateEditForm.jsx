@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css"
 const CertificateEditForm = ({ certi, setIsEditing, certificateList, setCertificateList }) => {
     const [title, setTitle] = useState(certi.title)
     const [description, setDescription] = useState(certi.description)
-    const [when_date, setWhen_date] = useState(new Date())
+    const [when_date, setWhen_date] = useState(new Date(certi.when_date))
     const userState = React.useContext(UserStateContext)
     const { id } = userState.user
 
@@ -46,7 +46,7 @@ const CertificateEditForm = ({ certi, setIsEditing, certificateList, setCertific
                             placeholder="자격증 제목"
                             value={title}
                             onChange={(e) => {
-                                e.preventDefault();
+                                e.preventDefault()
                                 setTitle(e.target.value)
                             }}
                         />
@@ -58,7 +58,7 @@ const CertificateEditForm = ({ certi, setIsEditing, certificateList, setCertific
                             placeholder="상세내역"
                             value={description}
                             onChange={(e) => {
-                                e.preventDefault();
+                                e.preventDefault()
                                 setDescription(e.target.value)
                             }}
                         />

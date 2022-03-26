@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose"
 
 const CertificateSchema = new Schema(
   {
@@ -31,6 +31,6 @@ const CertificateSchema = new Schema(
   }
 );
 
-const CertificateModel = model("Certificate", CertificateSchema);
+const CertificateModel = model("Certificate", CertificateSchema)
 
-export { CertificateModel };
+export { CertificateModel }

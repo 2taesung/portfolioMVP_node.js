@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CertificateEditForm from "./CertificateEditForm"
 import { Card, Col, Row, Button, Container } from "react-bootstrap"
 import moment from 'moment'
-import * as Api from "../../api";
+import * as Api from "../../api"
 
 
 const CertificateCard = ({ isEditable, certi, certificateList, setCertificateList }) => {
@@ -77,6 +77,6 @@ const CertificateCard = ({ isEditable, certi, certificateList, setCertificateLis
       </Col>
     </Container>
   )
-};
+}
 
-export default CertificateCard;
+export default CertificateCard

@@ -12,13 +12,13 @@ const AwardEditForm = ({awd, setIsEditing, awardList, setAwardList}) => {
 
     const handleSubmit = async (e) => {
         e.stopPropagation()
-        e.preventDefault();    
+        e.preventDefault()
         const res = await Api.put(`awards/${awd.id}`, {
             user_id: id,
             id: awd.id,
             title,
             description,
-        });
+        })
         const updatedAward = res.data
         const updatedList = awardList.map((awd) => {
             if(awd.id === updatedAward.id) {
@@ -33,7 +33,7 @@ const AwardEditForm = ({awd, setIsEditing, awardList, setAwardList}) => {
       }
 
     return (
-        <Card className="mb-2">
+        <Container className="mb-2">
             <Card.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="awardEditTitle" className="mb-3">
@@ -41,7 +41,10 @@ const AwardEditForm = ({awd, setIsEditing, awardList, setAwardList}) => {
                             type="text"
                             placeholder="수상내역"
                             value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            onChange={(e) => {
+                                e.preventDefault()
+                                setTitle(e.target.value)
+                            }}
                         />
                     </Form.Group>
                     
@@ -50,13 +53,16 @@ const AwardEditForm = ({awd, setIsEditing, awardList, setAwardList}) => {
                             type="text"
                             placeholder="상세내역"
                             value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => {
+                                e.preventDefault()
+                                setDescription(e.target.value)
+                            }}
                         />
                     </Form.Group>
 
                     <Form.Group as={Row} className="mt-3 text-center">
                         <Col sm={{ span: 20 }}>
-                            <Button variant="primary" type="submit" className="me-3">
+                            <Button variant="primary" type="button" className="me-3" onClick={handleSubmit}>
                                 확인
                             </Button>
                             <Button variant="secondary" onClick={() => setIsEditing(false)}>
@@ -66,7 +72,7 @@ const AwardEditForm = ({awd, setIsEditing, awardList, setAwardList}) => {
                     </Form.Group>
                 </Form>
             </Card.Body>
-        </Card>
+        </Container>
     )
 }
 
