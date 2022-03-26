@@ -8,7 +8,7 @@ class Award {
 
   static async findById({ award_id }) {
     const post = await AwardModel.findOne({ id: award_id })
-    console.log(award_id)
+
     return post
   }
   
