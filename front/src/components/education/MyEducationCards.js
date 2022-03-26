@@ -55,6 +55,4 @@ function MyEducationCards({
 export default MyEducationCards;
 
 const MyEducationCardWrapper = styled.div`
-  padding: 8px;
-  border: 1px solid #ddd;
 `;

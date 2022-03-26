@@ -6,9 +6,8 @@ import { Container, Col, Row } from "react-bootstrap";
 import { UserStateContext } from "../App";
 import * as Api from "../api";
 import User from "./user/User";
-import Projects from "./project/Projects";
-import Awards from "./award/Awards";
-import AwardTest from "./award/awardtest";
+import Projects from "./project/ProjectContainer";
+import Awards from "./award/AwardContainer";
 import Education from "./education/Education";
 import CertificateContainer from "./certificate/CertificateContainer";
 
@@ -60,43 +59,46 @@ function Portfolio() {
   //md: medicum, lg: large lx: extra large
 
   return (
-    <PortfolioWrapper>
-      <Col>
-        <Col md="3" lg="3">
+    <Container className="fluid">
+      <Row>
+        <Col lg="3">
           <User
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
         </Col>
-        <Row>
-          <div>
-            {/* <AwardTest /> */}
-            {/* <Projects
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={portfolioOwner.id === userState.user?.id}
-            /> */}
-            {/* <Awards
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={portfolioOwner.id === userState.user?.id}
-            /> */}
-
+        <Col>
+          <Row className="mb-3">
             <Education
               portfolioOwnerId={portfolioOwner.id}
               isEditable={portfolioOwner.id === userState.user?.id}
             />
-
+          </Row>
+          <Row className="mb-3">
+            <Awards
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
+          </Row>
+          <Row className="mb-3">
+            <Projects
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
+          </Row>
+          <Row className="mb-3">
             <CertificateContainer
               isEditable={portfolioOwner.id === userState.user?.id}
             />
-          </div>
-        </Row>
-      </Col>
-    </PortfolioWrapper>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
-const PortfolioWrapper = styled.div`
-  padding: 30px 10px;
-`;
+// const PortfolioWrapper = styled.div`
+//   padding: 30px 10px;
+// `;
 
 export default Portfolio;

@@ -6,36 +6,43 @@ import { UserStateContext } from "../../App";
 import * as Api from "../../api";
 
 const Projects = ({ isEditable }) => {
-  const [isAdding, setIsAdding] = useState(false);
-  const [projectList, setProjectList] = useState([]);
-  const userState = React.useContext(UserStateContext);
-  const { id } = userState.user;
+  const [isAdding, setIsAdding] = useState(false)
+  const [projectList, setProjectList] = useState([])
+  const userState = React.useContext(UserStateContext)
+  const { id } = userState.user
+
+  const newProjectHandler = React.useCallback(
+    (newProject) => {
+      const newList = projectList.concat(newProject)
+      setProjectList(newList)
+    },
+    [projectList]
+  )
+  
 
   useEffect(() => {
-    Api.get("projectlist", id).then((res) => setProjectList(res.data));
-  }, [projectList, userState]);
-
-  const newProjectHandler = (newProject) => {
-    const newProjectList = [...projectList]
-    newProjectList.push(newProject)
-    setProjectList(newProjectList)
-  }
+    Api.get("projectlist", id).then((res) => setProjectList(res.data))
+  }, [])
 
   return (
-    <Card className="mb-1 ms-1 mr-1">
+    <Card>
       <Card.Body>
-        <Col className="justify-content-md-center">
+        <Col>
           <Card.Title>프로젝트</Card.Title>
         </Col>
         <Col>
-          <Project isEditable={isEditable} projectList={projectList} />
+          <Project 
+            isEditable={isEditable} 
+            projectList={projectList}
+            setProjectList={setProjectList}
+          />
         </Col>
 
         {isEditable && (
           <Col className="text-center" sm={{ span: 20 }}>
             <Button
               variant="primary"
-              size="sm"
+              size="md"
               onClick={() => setIsAdding(true)}
             >
               +

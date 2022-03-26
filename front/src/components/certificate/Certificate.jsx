@@ -1,26 +1,28 @@
-import React from "react";
-import CertificateCard from "./CertificateCard";
+import React from "react"
+import CertificateCard from "./CertificateCard"
 
-const Certificate = ({ isEditable, certificateList }) => {
+const Certificate = ({ isEditable, certificateList, setCertificateList }) => {
   return (
-    <div>
+    <>
       {certificateList.map((certi) => {
         return (
           <CertificateCard
             isEditable={isEditable}
             key={`certi-${certi.id}`}
             user={`certi-${certi.user_id}`}
+            certificateList={certificateList}
             certi={{
               id: certi.id,
               title: certi.title,
               description: certi.description,
-              when_date: certi.whenDate,
+              when_date: certi.when_date,
             }}
+            setCertificateList={setCertificateList}
           />
-        );
+        )
       })}
-    </div>
-  );
-};
+    </>
+  )
+}
 
-export default Certificate;
+export default Certificate

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Api from "../../api";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import { Container, Button, Form, Card, Col, Row } from "react-bootstrap";
 import RadioButtonOnRegister from "./RadioButtonOnRegister";
 
 function EducationRegisterForm({
@@ -30,7 +30,7 @@ function EducationRegisterForm({
   );
 
   return (
-    <Card>
+    <Container>
       <Card.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="school" className="mb-3">
@@ -70,7 +70,7 @@ function EducationRegisterForm({
           </Form.Group>
         </Form>
       </Card.Body>
-    </Card>
+    </Container>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import OthersEducationCards from "./OthersEducationCards";
 import MyEducationCards from "./MyEducationCards";
 import * as Api from "../../api";
+import { Card, Col } from "react-bootstrap";
 
 function Education({ portfolioOwnerId, isEditable }) {
   const [educations, setEducations] = useState([]);
@@ -40,16 +41,34 @@ function Education({ portfolioOwnerId, isEditable }) {
    */
   if (isEditable) {
     return (
-      <MyEducationCards
-        educations={educations}
-        portfolioOwnerId={portfolioOwnerId}
-        handleAddEducationClick={handleAddEducationClick}
-        onEditEducation={handleEditEducation}
-      ></MyEducationCards>
+        <Card>
+          <Card.Body>
+            <Col>
+              <Card.Title>학력</Card.Title>
+            </Col>
+            <Col>
+              <MyEducationCards
+                educations={educations}
+                portfolioOwnerId={portfolioOwnerId}
+                handleAddEducationClick={handleAddEducationClick}
+                onEditEducation={handleEditEducation}
+              ></MyEducationCards>
+            </Col>
+          </Card.Body>
+        </Card>
     );
   }
 
-  return <OthersEducationCards educations={educations}></OthersEducationCards>;
+  return (
+      <Card>
+        <Card.Body>          
+          <Col>
+            <Card.Title>학력</Card.Title>
+            <OthersEducationCards educations={educations}></OthersEducationCards>
+          </Col>
+        </Card.Body>
+      </Card>
+  )
 }
 
 export default Education;

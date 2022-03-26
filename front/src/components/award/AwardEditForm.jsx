@@ -1,22 +1,36 @@
-import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
+import React, { useState } from "react"
+import { Container, Button, Form, Card, Col, Row } from "react-bootstrap"
+import * as Api from "../../api"
+import { UserStateContext } from "../../App"
 
-const AwardEditForm = ({award, setIsEditing, setAwardList}) => {
-    const [title, setTitle] = useState(award.title)
-    const [description, setDescription] = useState(award.description)
+const AwardEditForm = ({awd, setIsEditing, awardList, setAwardList}) => {
+    const [title, setTitle] = useState(awd.title)
+    const [description, setDescription] = useState(awd.description)
+    const userState = React.useContext(UserStateContext)
+    const { id } = userState.user
     
 
     const handleSubmit = async (e) => {
+        e.stopPropagation()
         e.preventDefault();    
-        const res = await Api.put(`awards/${award.id}`, {
-          title,
-          description,
+        const res = await Api.put(`awards/${awd.id}`, {
+            user_id: id,
+            id: awd.id,
+            title,
+            description,
         });
-        const updatedAwardList = res.data;
-        setAwardList(updatedAwardList);
-        setIsEditing(false);
-      };
+        const updatedAward = res.data
+        const updatedList = awardList.map((awd) => {
+            if(awd.id === updatedAward.id) {
+                return {
+                    ...updatedAward,
+                }
+            }
+            return awd
+        })
+        setAwardList(updatedList)
+        setIsEditing(false)
+      }
 
     return (
         <Card className="mb-2">
@@ -56,4 +70,4 @@ const AwardEditForm = ({award, setIsEditing, setAwardList}) => {
     )
 }
 
-export default AwardEditForm;
+export default AwardEditForm

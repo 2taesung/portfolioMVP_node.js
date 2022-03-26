@@ -1,22 +1,41 @@
-import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
+import React, { useState } from "react"
+import { Container, Button, Form, Card, Col, Row } from "react-bootstrap"
+import * as Api from "../../api"
+import { UserStateContext } from "../../App"
 
 const ProjectEditForm = ({prj, setIsEditing, setProjectList}) => {
     const [title, setTitle] = useState(prj.title)
-    const [description, setDescription] = useState(prj.description)
+    const [description, setDescription] = useState(prj.description)    
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    const userState = React.useContext(UserStateContext)
+    const { id } = userState.user
+
     
 
     const handleSubmit = async (e) => {
+        e.stopPropagation()
         e.preventDefault();    
         const res = await Api.put(`projects/${prj.id}`, {
+          user_id: id,
+          id: prj.id,
           title,
           description,
+          from_date: startDate,
+          to_date: endDate,
         });
-        const updatedProjectList = res.data;
-        setProjectList(updatedProjectList);
-        setIsEditing(false);
-      };
+        const updatedProject = res.data
+        const updatedList = updatedProject.map((prj) => {
+            if (prj.id === updatedProject.id) {
+                return {
+                    ...updatedProject
+                }
+                return prj
+            }
+        })
+        setProjectList(updatedList)
+        setIsEditing(false)
+      }
 
     return (
         <Card className="mb-2">

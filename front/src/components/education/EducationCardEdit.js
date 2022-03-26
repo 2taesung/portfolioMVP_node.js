@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Api from "../../api";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import { Button, Form, Card, Col, Row, Container } from "react-bootstrap";
 
 function EducationCardEdit({ setIsEditing, cardInfo, onEditEducation }) {
   const [school, setSchool] = useState(cardInfo.school);
@@ -26,7 +26,7 @@ function EducationCardEdit({ setIsEditing, cardInfo, onEditEducation }) {
 
   return (
     <>
-      <Card>
+      <Container className="mb-2">
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="school" className="mb-3">
@@ -49,39 +49,51 @@ function EducationCardEdit({ setIsEditing, cardInfo, onEditEducation }) {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 mt-3">
               <Form.Check
                 inline
-                label="학사중"
+                label="재학중"
                 name="position"
                 type="radio"
                 id="inline-radio-1"
-                value="학사중"
-                defaultChecked={position === "학사중"}
+                value="재학중"
+                defaultChecked={position === "재학중"}
                 onChange={(e) => {
                   setPosition(e.target.value);
                 }}
               />
               <Form.Check
                 inline
-                label="석사중"
+                label="학사졸업"
                 name="position"
                 type="radio"
                 id="inline-radio-2"
-                value="석사중"
-                defaultChecked={position === "석사중"}
+                value="학사졸업"
+                defaultChecked={position === "학사졸업"}
                 onChange={(e) => {
                   setPosition(e.target.value);
                 }}
               />
               <Form.Check
                 inline
-                label="박사중"
+                label="석사졸업"
                 name="position"
                 type="radio"
                 id="inline-radio-3"
-                value="박사중"
-                defaultChecked={position === "박사중"}
+                value="석사졸업"
+                defaultChecked={position === "석사졸업"}
+                onChange={(e) => {
+                  setPosition(e.target.value);
+                }}
+              />
+              <Form.Check
+                inline
+                label="박사졸업"
+                name="position"
+                type="radio"
+                id="inline-radio-4"
+                value="박사졸업"
+                defaultChecked={position === "박사졸업"}
                 onChange={(e) => {
                   setPosition(e.target.value);
                 }}
@@ -100,7 +112,7 @@ function EducationCardEdit({ setIsEditing, cardInfo, onEditEducation }) {
             </Form.Group>
           </Form>
         </Card.Body>
-      </Card>
+      </Container>
     </>
   );
 }

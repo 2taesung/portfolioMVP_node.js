@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { UserStateContext } from "../../App";
-import { Button, Form, Col, Row, Card } from "react-bootstrap";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import * as Api from "../../api";
+import React, { useState } from "react"
+import { UserStateContext } from "../../App"
+import { Button, Form, Col, Row, Container } from "react-bootstrap"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import * as Api from "../../api"
 
 const CertificateAddForm = ({ addCertificateList, setIsAdding }) => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [whenDate, setWhenDate] = useState(new Date())
+  const [when_date, setWhen_date] = useState(new Date())
   const userState = React.useContext(UserStateContext)
-  const { id } = userState.user;
+  const { id } = userState.user
 
   const handleAddClick = async (event) => {
     event.stopPropagation()
@@ -18,62 +18,60 @@ const CertificateAddForm = ({ addCertificateList, setIsAdding }) => {
       user_id: id,
       title,
       description,
-      whenDate,
-    });
-    const newCertificate = res.data;
-    addCertificateList(newCertificate);
-    setIsAdding(false);
-  };
+      when_date,
+    })
+    const newCertificate = res.data
+    addCertificateList(newCertificate)
+    setIsAdding(false)
+  }
 
   
   return (
-    <Card>
-      <Card.Body>
-        <Form>
-          <Form.Group controlId="certificateEditTitle" className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="자격증 제목"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-            />
-          </Form.Group>
+    <Container>
+      <Form>
+        <Form.Group controlId="certificateEditTitle" className="mb-3">
+          <Form.Control
+            type="text"
+            placeholder="자격증 제목"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </Form.Group>
 
-          <Form.Group controlId="certificateEditDescription" className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="상세내역"
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-            />
-          </Form.Group>
+        <Form.Group controlId="certificateEditDescription" className="mb-3">
+          <Form.Control
+            type="text"
+            placeholder="상세내역"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
+        </Form.Group>
 
-          <Row>
-            <DatePicker
-              selected={whenDate}
-              onChange={(date) => setWhenDate(date)}
-            />
-          </Row>
+        <Row>
+          <DatePicker
+            selected={when_date}
+            onChange={(date) => setWhen_date(date)}
+          />
+        </Row>
 
-          <Form.Group as={Row} className="mt-3 text-center">
-            <Col sm={{ span: 20 }}>
-              <Button
-                variant="primary"
-                type="button"
-                className="me-3"
-                onClick={handleAddClick}
-              >
-                확인
-              </Button>
-              <Button variant="secondary" onClick={() => setIsAdding(false)}>
-                취소
-              </Button>
-            </Col>
-          </Form.Group>
-        </Form>
-      </Card.Body>
-    </Card>
-  );
-};
+        <Form.Group as={Row} className="mt-3 text-center">
+          <Col sm={{ span: 20 }}>
+            <Button
+              variant="primary"
+              type="button"
+              className="me-3"
+              onClick={handleAddClick}
+            >
+              확인
+            </Button>
+            <Button variant="secondary" onClick={() => setIsAdding(false)}>
+              취소
+            </Button>
+          </Col>
+        </Form.Group>
+      </Form>
+    </Container>
+  )
+}
 
 export default CertificateAddForm;

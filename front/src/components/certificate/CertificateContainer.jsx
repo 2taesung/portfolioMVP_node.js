@@ -17,56 +17,49 @@ const CertificateContainer = ({ isEditable }) => {
       setCertificateList(newList)
     },
     [certificateList]
-  )  
-    // const newCertificateList = [...certificateList];
-    // newCertificateList.push(newCertificate);
-    // setCertificateList(newCertificateList);
-    
-    const removeHandler = React.useCallback(
-      (removedCertificate) => {
-        const removedList = certificateList.filter(removedCertificate)
-        setCertificateList(removedList)
-      },
-      [certificateList]
-    )
-
+  )
+  // const newCertificateList = [...certificateList];
+  // newCertificateList.push(newCertificate);
+  // setCertificateList(newCertificateList);
+  
   useEffect(() => {
     Api.get("certificatelist", id).then((res) => setCertificateList(res.data));
   }, []);
 
   return (
-    <Card className="mb-1 ms-1 mr-1">
-      <Card.Body>
-        <Col className="justify-content-md-center">
-          <Card.Title>자격증</Card.Title>
-        </Col>
-        <Col>
-          <Certificate
-            isEditable={isEditable}
-            certificateList={certificateList}
-          />
-        </Col>
-
-        {isEditable && (
-          <Col className="text-center" sm={{ span: 20 }}>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => setIsAdding(true)}
-            >
-              +
-            </Button>
+      <Card>
+        <Card.Body>
+          <Col>
+            <Card.Title>자격증</Card.Title>
           </Col>
-        )}
+          <Col>
+            <Certificate
+              isEditable={isEditable}
+              certificateList={certificateList}
+              setCertificateList={setCertificateList}
+            />
+          </Col>
 
-        {isAdding && (
-          <CertificateAddForm
-            setIsAdding={setIsAdding}
-            addCertificateList={newCertificateHandler}
-          />
-        )}
-      </Card.Body>
-    </Card>
+          {isEditable && (
+            <Col className="text-center" sm={{ span: 20 }}>
+              <Button
+                variant="primary"
+                size="md"
+                onClick={() => setIsAdding(true)}
+              >
+                +
+              </Button>
+            </Col>
+          )}
+
+          {isAdding && (
+            <CertificateAddForm
+              setIsAdding={setIsAdding}
+              addCertificateList={newCertificateHandler}
+            />
+          )}
+        </Card.Body>
+      </Card>
   );
 };
 

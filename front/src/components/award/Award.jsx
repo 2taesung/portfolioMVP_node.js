@@ -1,37 +1,28 @@
-import React, { useEffect, useState } from "react";
-import * as Api from "../../api";
-import AwardCard from "./AwardCard";
-import { UserStateContext } from "../../App";
+import React from "react"
+import AwardCard from "./AwardCard"
 
-const Award = ({ isEditable, setIsEditing }) => {
-  const [awardList, setAwardList] = useState([]);
-  const userState = React.useContext(UserStateContext);
-
-  useEffect(() => {
-    const { id } = userState.user;
-    Api.get("awardlist", id).then((res) => setAwardList(res.data));
-  }, [awardList, userState]);
+const Award = ({ isEditable, awardList, setAwardList }) => {
 
   return (
     <>
-      {[
-        { id: 1, title: "title1", description: "desc1" },
-        { id: 2, title: "title2", description: "desc2" },
-        { id: 3, title: "title3", description: "desc3" },
-      ].map((award) => {
+      {awardList.map((awd) => {
         return (
           <AwardCard
-            key={`award-${award.id}`}
-            award={{
-              id: award.id,
-              title: award.title,
-              description: award.description,
+            isEditable={isEditable}
+            key={`awd-${awd.id}`}
+            user={`awd-${awd.user_id}`}
+            certificateList={awardList}
+            certi={{
+              id: awd.id,
+              title: awd.title,
+              description: awd.description,
             }}
+            setAwardList={setAwardList}
           />
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
-export default Award;
+export default Award
