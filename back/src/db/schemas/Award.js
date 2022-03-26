@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose"
 
 const AwardSchema = new Schema(
   {
@@ -8,7 +8,7 @@ const AwardSchema = new Schema(
     },
     user_id: {
       type: String,
-      required: true,
+      required: true,      
       index: true,
     },
     title: {
@@ -26,6 +26,6 @@ const AwardSchema = new Schema(
   }
 );
 
-const AwardModel = model("Award", AwardSchema);
+const AwardModel = model("Award", AwardSchema)
 
-export { AwardModel };
+export { AwardModel }

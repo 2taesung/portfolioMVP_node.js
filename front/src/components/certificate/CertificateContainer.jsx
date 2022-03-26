@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import CertificateAddForm from "./CertificateAddForm";
-import Certificate from "./Certificate";
-import { Card, Button, Col } from "react-bootstrap";
-import { UserStateContext } from "../../App";
-import * as Api from "../../api";
+import React, { useState, useEffect } from "react"
+import CertificateAddForm from "./CertificateAddForm"
+import Certificate from "./Certificate"
+import { Card, Button, Col } from "react-bootstrap"
+import { UserStateContext } from "../../App"
+import * as Api from "../../api"
 
 const CertificateContainer = ({ isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -23,8 +23,8 @@ const CertificateContainer = ({ isEditable }) => {
   // setCertificateList(newCertificateList);
   
   useEffect(() => {
-    Api.get("certificatelist", id).then((res) => setCertificateList(res.data));
-  }, []);
+    Api.get("certificatelist", id).then((res) => setCertificateList(res.data))
+  }, [])
 
   return (
       <Card>

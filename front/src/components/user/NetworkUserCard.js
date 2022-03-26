@@ -12,7 +12,7 @@ function UserCard({
   return (
     <Card 
       className="mb-2 ms-3 mr-5"
-      style={{ backgroundColor: user?.backgroundColor }}
+      style={{ backgroundColor: user?.backgroundColor, width: "18rem" }}
       text={backgroundColor === ('#663399'|'#2e8b57'|'#FF4500') ? 'dark' : 'white'}   
     >
       <Card.Body>

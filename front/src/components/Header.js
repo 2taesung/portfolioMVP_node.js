@@ -20,7 +20,7 @@ function Header() {
     // dispatch 함수를 이용해 로그아웃함.
     dispatch({ type: "LOGOUT" });
     // 기본 페이지로 돌아감.
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -29,14 +29,14 @@ function Header() {
         <Nav.Link disabled>안녕하세요, 포트폴리오 공유 서비스입니다.</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/")}>나의 페이지</Nav.Link>
+      <Nav.Link style={{color: "#430f58"}} onClick={() => navigate("/")}>My Page</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/network")}>네트워크</Nav.Link>
+      <Nav.Link style={{color: "#6643b5"}} onClick={() => navigate("/network")}>Network</Nav.Link>
       </Nav.Item>
       {isLogin && (
         <Nav.Item>
-          <Nav.Link onClick={logout}>로그아웃</Nav.Link>
+          <Nav.Link style={{color: "#8594e4"}} onClick={logout}>Logout</Nav.Link>
         </Nav.Item>
       )}
     </Nav>

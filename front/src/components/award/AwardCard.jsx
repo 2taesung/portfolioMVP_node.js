@@ -1,7 +1,6 @@
 import React from "react"
 import AwardEditForm from "./AwardEditForm"
 import { Card, Col, Row, Button, Container } from "react-bootstrap"
-import { UserStateContext } from "../../App"
 
 const AwardCard = ({ isEditable, awd, awardList, setAwardList }) => {
   const [isEditing, setIsEditing] = React.useState(false)

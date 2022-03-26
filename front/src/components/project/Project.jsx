@@ -8,7 +8,7 @@ const Project = ({ isEditable, projectList, setProjectList }) => {
       {projectList.map((prj) => {
         return (
           <ProjectCard
-          isEditable={isEditable}
+            isEditable={isEditable}
             user={`prj-${prj.user_id}`}
             key={`prj-${prj.id}`}
             projectList={projectList}
@@ -19,6 +19,7 @@ const Project = ({ isEditable, projectList, setProjectList }) => {
               from_date: prj.from_date,
               to_date: prj.to_date,
             }}
+            setProjectList={setProjectList}
           />
         );
       })}

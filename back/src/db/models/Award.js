@@ -1,14 +1,15 @@
-import { AwardModel } from "../schemas/Award";
+import { AwardModel } from "../schemas/Award"
 
 class Award {
   static async create({ newAward }) {
-    const createdNewAward = await AwardModel.create(newAward);
-    return createdNewAward;
+    const createNewAward = await AwardModel.create(newAward)
+    return createNewAward
   }
 
-  static async findAll({ user_id }) {
-    const userAwardList = await AwardModel.find({ user_id });
-    return userAwardList;
+  static async findById({ award_id }) {
+    const post = await AwardModel.findOne({ id: award_id })
+    console.log(award_id)
+    return post
   }
   
 
@@ -21,10 +22,13 @@ class Award {
     return await AwardModel.findOneAndUpdate(filter, newValue, {new: true})
 }
 
-  static async findById({ awards_id }) {
-    const userAwards = await AwardModel.findOne({ id: awards_id });
-    return userAwards;
+
+
+  static async findAll({user_id}) {
+    const awards = await AwardModel.find({user_id})
+    return awards
   }
+
 }
 
-export { Award };
+export { Award }

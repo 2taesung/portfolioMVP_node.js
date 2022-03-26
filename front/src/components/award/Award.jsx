@@ -11,8 +11,8 @@ const Award = ({ isEditable, awardList, setAwardList }) => {
             isEditable={isEditable}
             key={`awd-${awd.id}`}
             user={`awd-${awd.user_id}`}
-            certificateList={awardList}
-            certi={{
+            awardList={awardList}
+            awd={{
               id: awd.id,
               title: awd.title,
               description: awd.description,

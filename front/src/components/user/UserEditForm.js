@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import { Button, Form, Card, Col, Row, ButtonGroup } from "react-bootstrap";
+import styled from "styled-components";
 import * as Api from "../../api";
 
 function UserEditForm({ user, setIsEditing, setUser }) {
@@ -9,6 +10,8 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   const [email, setEmail] = useState(user.email);
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState(user.description);
+  const [backgroundColor, setBackgroundColor] = useState(user.backgroundColor);
+  const [editFormColor, setEditFormColor] = useState(backgroundColor);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +21,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
       name,
       email,
       description,
+      backgroundColor,
     });
     // 유저 정보는 response의 data임.
     const updatedUser = res.data;
@@ -29,7 +33,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   };
 
   return (
-    <Card className="mb-2">
+    <Card className="mb-2" style={{backgroundColor: editFormColor}}>
       <Card.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="useEditName" className="mb-3">
@@ -58,6 +62,84 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
+          
+          <ButtonWrapper>
+          <ButtonGroup className="lg">
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#ffb6c1" }}
+              onClick={(e) => {
+                setBackgroundColor("#ffb6c1")
+                setEditFormColor("#ffb6c1")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#e6e6fa" }}
+              onClick={(e) => {
+                setBackgroundColor("#e6e6fa")
+                setEditFormColor("#e6e6fa")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#663399" }}
+              onClick={(e) => {
+                setBackgroundColor("#663399")
+                setEditFormColor("#663399")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#2e8b57" }}
+              onClick={(e) => {
+                setBackgroundColor("#2e8b57")
+                setEditFormColor("#2e8b57")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#FFFACD" }}
+              onClick={(e) => {
+                setBackgroundColor("#FFFACD")
+                setEditFormColor("#FFFACD")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#ADD8E6" }}
+              onClick={(e) => {
+                setBackgroundColor("#ADD8E6")
+                setEditFormColor("#ADD8E6")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#FF4500" }}
+              onClick={(e) => {
+                setBackgroundColor("#FF4500")
+                setEditFormColor("#FF4500")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#00FF00" }}
+              onClick={(e) => {
+                setBackgroundColor("#00FF00")
+                setEditFormColor("#00FF00")
+              }}
+            ></Button>
+            <Button
+              class="btn btn-outline-light"
+              style={{ backgroundColor: "#7B68EE" }}
+              onClick={(e) => {
+                setBackgroundColor("#7B68EE")
+                setEditFormColor("#7B68EE")
+              }}
+            ></Button>
+          </ButtonGroup>
+          </ButtonWrapper>
+
 
           <Form.Group as={Row} className="mt-3 text-center">
             <Col sm={{ span: 20 }}>
@@ -76,3 +158,10 @@ function UserEditForm({ user, setIsEditing, setUser }) {
 }
 
 export default UserEditForm;
+
+const ButtonWrapper = styled.div`
+  border: 0
+  outline: 0
+  display: inline-block
+  
+`
