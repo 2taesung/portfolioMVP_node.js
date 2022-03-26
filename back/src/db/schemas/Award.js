@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const UserSchema = new Schema(
+const AwardSchema = new Schema(
   {
     id: {
       type: String,
@@ -9,6 +9,7 @@ const UserSchema = new Schema(
     user_id: {
       type: String,
       required: true,
+      index: true,
     },
     title: {
       type: String,
@@ -16,8 +17,8 @@ const UserSchema = new Schema(
     },
     description: {
       type: String,
-      required: false,
-      default: "설명이 아직 없습니다. 추가해 주세요.",
+      required: true,
+
     },
   },
   {
