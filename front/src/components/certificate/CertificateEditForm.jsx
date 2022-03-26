@@ -23,15 +23,15 @@ const CertificateEditForm = ({ certi, setIsEditing, certificateList, setCertific
             description,
             when_date,
         });
-        const updatedCertificate = res.data;
+        const updatedCertificate = res.data
         const updatedList = certificateList.map((certi) => {
             if (certi.id === updatedCertificate.id) {
               return {
                 ...updatedCertificate,
-              };
+              }
             }
             return certi
-          });
+          })
         setCertificateList(updatedList)
         setIsEditing(false)
     }
@@ -64,7 +64,7 @@ const CertificateEditForm = ({ certi, setIsEditing, certificateList, setCertific
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="certificatedateDescription" className="mt-3">
+                    <Form.Group controlId="certificateDateEdit" className="mt-3">
                         <DatePicker
                             selected={when_date}
                             onChange={(date) => setWhen_date(date)}
@@ -87,4 +87,4 @@ const CertificateEditForm = ({ certi, setIsEditing, certificateList, setCertific
     )
 }
 
-export default CertificateEditForm;
+export default CertificateEditForm
