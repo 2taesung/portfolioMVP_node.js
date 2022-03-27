@@ -1,7 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import CertificateCard from "./CertificateCard"
+import MyCard from "./MyCard"
 
 const Certificate = ({ isEditable, certificateList, setCertificateList }) => {
+  
+  if(isEditable) {
+    return <MyCard />
+  }
+  
   return (
     <>
       {certificateList.map((certi) => {

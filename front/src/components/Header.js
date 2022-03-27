@@ -7,8 +7,10 @@ function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const userState = useContext(UserStateContext);
-  const dispatch = useContext(DispatchContext);
+  const userState = useContext(UserStateContext)
+  const dispatch = useContext(DispatchContext)
+  const { id } = userState.user
+
 
   // 전역상태에서 user가 null이 아니라면 로그인 성공 상태임.
   const isLogin = !!userState.user;

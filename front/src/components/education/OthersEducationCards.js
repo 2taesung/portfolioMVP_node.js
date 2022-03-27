@@ -1,16 +1,14 @@
 import React from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col } from "react-bootstrap";
 
 function OthersEducationCards({ educations }) {
   return (
     <>
-      {educations == null ? (
-        <></>
-      ) : (
+      {
         educations.map((item) => {
           return (
             <>
-              <Card className="mb-1 ms-1 mr-1">
+              <Container className="mb-1 ms-1 mr-1">
                 <Card.Body>
                   <Row>
                     <Col>
@@ -20,11 +18,11 @@ function OthersEducationCards({ educations }) {
                     </Col>
                   </Row>
                 </Card.Body>
-              </Card>
+              </Container>
             </>
           );
         })
-      )}
+      }
     </>
   );
 }

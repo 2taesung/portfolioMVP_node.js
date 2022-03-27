@@ -4,8 +4,7 @@ import { Card, Row, Button, Col } from "react-bootstrap";
 function UserCard({ 
     user, 
     setIsEditing, 
-    isEditable, 
-    backgroundColor, 
+    isEditable,
     isNetwork
   }) {
   const navigate = useNavigate()
@@ -15,6 +14,7 @@ function UserCard({
     user?.backgroundColor ==='#FF4500'|| user?.backgroundColor ==='#7B68EE'
            ? 'white' : 'dark'
   }
+  console.log(user)
 
   return (
     <Card 

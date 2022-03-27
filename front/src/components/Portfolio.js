@@ -60,41 +60,43 @@ function Portfolio() {
 
   return (
     <PortfolioWrapper>
-    <Container className="fluid">
-      <Row>
-        <Col lg="3">
-          <User
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
-          />
-        </Col>
-        <Col>
-          <Row className="mb-3">
-            <Education
+      <Container className="fluid">
+        <Row>
+          <Col lg="3">
+            <User
               portfolioOwnerId={portfolioOwner.id}
               isEditable={portfolioOwner.id === userState.user?.id}
             />
-          </Row>
-          <Row className="mb-3">
-            <Awards
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={portfolioOwner.id === userState.user?.id}
-            />
-          </Row>
-          <Row className="mb-3">
-            <Projects
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={portfolioOwner.id === userState.user?.id}
-            />
-          </Row>
-          <Row className="mb-3">
-            <CertificateContainer
-              isEditable={portfolioOwner.id === userState.user?.id}
-            />
-          </Row>
-        </Col>
-      </Row>
-    </Container>
+          </Col>
+          <Col>
+            <Row className="mb-3">
+              <Education
+                portfolioOwnerId={portfolioOwner.id}
+                isEditable={portfolioOwner.id === userState.user?.id}
+              />
+            </Row>
+            <Row className="mb-3">
+              <Awards
+                portfolioOwnerId={portfolioOwner.id}
+                isEditable={portfolioOwner.id === userState.user?.id}
+              />
+            </Row>
+            <Row className="mb-3">
+              <Projects
+                portfolioOwnerId={portfolioOwner.id}
+                isEditable={portfolioOwner.id === userState.user?.id}
+              />
+            </Row>
+            <Row className="mb-3">
+              <CertificateContainer
+
+                portfolioOwnerId={portfolioOwner.id}
+                isEditable={portfolioOwner.id === userState.user?.id}
+              />
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </PortfolioWrapper>
   );
 }

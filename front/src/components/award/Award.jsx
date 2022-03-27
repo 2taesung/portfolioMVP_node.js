@@ -1,7 +1,12 @@
 import React from "react"
 import AwardCard from "./AwardCard"
+import MyCard from "./MyCard"
 
 const Award = ({ isEditable, awardList, setAwardList }) => {
+
+  if(isEditable) {
+    return <MyCard />
+  }
 
   return (
     <>

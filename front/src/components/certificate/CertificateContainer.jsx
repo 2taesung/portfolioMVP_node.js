@@ -5,11 +5,9 @@ import { Card, Button, Col } from "react-bootstrap"
 import { UserStateContext } from "../../App"
 import * as Api from "../../api"
 
-const CertificateContainer = ({ isEditable }) => {
+const CertificateContainer = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [certificateList, setCertificateList] = useState([])
-  const userState = React.useContext(UserStateContext);
-  const { id } = userState.user;
 
   const newCertificateHandler = React.useCallback(
     (newCertificate) => {
@@ -23,7 +21,7 @@ const CertificateContainer = ({ isEditable }) => {
   // setCertificateList(newCertificateList);
   
   useEffect(() => {
-    Api.get("certificatelist", id).then((res) => setCertificateList(res.data))
+    Api.get("certificatelist", portfolioOwnerId).then((res) => setCertificateList(res.data))
   }, [])
 
   return (

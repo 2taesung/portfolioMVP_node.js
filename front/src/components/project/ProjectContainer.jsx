@@ -5,7 +5,7 @@ import { Card, Button, Col } from "react-bootstrap"
 import { UserStateContext } from "../../App"
 import * as Api from "../../api"
 
-const Projects = ({ isEditable }) => {
+const Projects = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false)
   const [projectList, setProjectList] = useState([])
   const userState = React.useContext(UserStateContext)
@@ -20,7 +20,7 @@ const Projects = ({ isEditable }) => {
   )  
 
   useEffect(() => {
-    Api.get("projectlist", id).then((res) => setProjectList(res.data))
+    Api.get("projectlist", portfolioOwnerId).then((res) => setProjectList(res.data))
   }, [])
 
   return (

@@ -5,11 +5,9 @@ import { Card, Button, Col } from "react-bootstrap"
 import { UserStateContext } from "../../App"
 import * as Api from "../../api"
 
-const Awards = ({ isEditable }) => {
+const Awards = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false)
   const [awardList, setAwardList] = useState([])
-  const userState = React.useContext(UserStateContext);
-  const { id } = userState.user;
 
   const newAwardHandler = React.useCallback(
     (newAward) => {
@@ -19,7 +17,7 @@ const Awards = ({ isEditable }) => {
     [awardList]
   )
   useEffect(() => {
-    Api.get("awardlist", id).then((res) => setAwardList(res.data))
+    Api.get("awardlist", portfolioOwnerId).then((res) => setAwardList(res.data))
   }, [])
 
   return (
